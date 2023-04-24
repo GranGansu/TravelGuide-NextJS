@@ -1,0 +1,9 @@
+1.- No selections
+2.- No scrollbar
+3.- Tipografía
+
+Comandos:
+npm i 
+npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p

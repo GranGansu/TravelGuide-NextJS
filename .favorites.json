@@ -1,0 +1,47 @@
+[
+    {
+        "type": "Directory",
+        "name": "d:\\Downloads\\Proyectos\\BA\\genericus\\components",
+        "parent_id": null,
+        "fsPath": "d:\\Downloads\\Proyectos\\BA\\genericus\\components",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "5W6K7f1NCk3EhT4q"
+    },
+    {
+        "type": "File",
+        "name": "d:\\Downloads\\Proyectos\\BA\\genericus\\tailwind.config.js",
+        "parent_id": null,
+        "fsPath": "d:\\Downloads\\Proyectos\\BA\\genericus\\tailwind.config.js",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "r2sTuh4y9lGK3kAw"
+    },
+    {
+        "type": "Directory",
+        "name": "d:\\Downloads\\Proyectos\\BA\\genericus\\configs",
+        "parent_id": null,
+        "fsPath": "d:\\Downloads\\Proyectos\\BA\\genericus\\configs",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "wdXB6YrTkWVt35sg"
+    },
+    {
+        "type": "Directory",
+        "name": "d:\\Downloads\\Proyectos\\BA\\genericus\\pages",
+        "parent_id": null,
+        "fsPath": "d:\\Downloads\\Proyectos\\BA\\genericus\\pages",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "wKOiAXIvfJG1lrZt"
+    },
+    {
+        "type": "Directory",
+        "name": "d:\\Downloads\\Proyectos\\BA\\genericus\\public",
+        "parent_id": null,
+        "fsPath": "d:\\Downloads\\Proyectos\\BA\\genericus\\public",
+        "workspaceRoot": null,
+        "workspacePath": null,
+        "id": "gz6hAfG12pLcNurl"
+    }
+]
