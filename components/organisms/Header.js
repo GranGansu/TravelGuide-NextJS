@@ -5,21 +5,32 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useState } from 'react';
 import { Menu } from '../molecules';
 import { Absolute, Img } from '../atoms';
-
+import { useRouter } from 'next/router';
 export default function Header() {
+  const router = useRouter();
   const [visible, setVisible] = useState(false);
   return (
-    <div className={`max-w-6xl m-auto sm:p-4 text-headerUl shadow-xl z-50 `}>
-      <div className='sm:mt-0 p-2 sm:py-0 sm:p-0  text-center flex sm:justify-center relative z-40'>
-        <ul className='sm:space-x-4 gap-x-6 sm:gap-x-1 sm:space-y-0 sm:flex-row text-md sm:text-md justify-center p-4 sm:p-0 items-center  uppercase  w-fit hidden sm:flex'>
-          <Link href='/' className={`z-50 relative hover:cursor-pointer p-2 px-0 flex items-center `}>
+    <div className={`m-auto  text-headerUl shadow-xl z-50 `}>
+      <div className=' relative z-40'>
+        <ul className='w-full  grid grid-cols-2 relative sm:max-w-4xl sm:mx-auto'>
+          {/*           <Link href='/' className={`z-50 relative hover:cursor-pointer p-2 px-0 flex items-center `}>
             <Img src='bmo.png' w='50'></Img>
             {!visible && <p className='text-lg capitalize bg-orange-400 px-2 rounded'>{home.title}</p>}
             {visible && <p className='z-50'>Home</p>}
-          </Link>
+          </Link> */}
           <Menu></Menu>
+          <Link href='/Saved'>
+            <div
+              className={`overflow-hidden absolute flex flex-col text-gray-500 items-center bg-white justify-center  p-4 rounded-full left-1/2 -translate-x-1/2 -translate-y-1/2  top-1/2  ${
+                router.pathname === '/Saved' && '-rotate-6 shadow-2xl border-4 border-red-300 fill-red-300'
+              }`}>
+              <svg className='z-10 relative' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
+                <path d='M5.495 2h16.505v-2h-17c-1.656 0-3 1.343-3 3v18c0 1.657 1.344 3 3 3h17v-20h-16.505c-1.376 0-1.376-2 0-2zm.505 4h7v7l2-2 2 2v-7h3v16h-14v-16z' />
+              </svg>
+            </div>
+          </Link>
         </ul>
-        <div className='sm:hidden w-full grid grid-cols-3 items-center relative z-0'>
+        <div className='hidden w-full grid grid-cols-3 items-center relative z-0'>
           <div
             className={` hover:cursor-pointer p-4 flex justify-start  ${visible && 'invisible'}`}
             onClick={() => {
