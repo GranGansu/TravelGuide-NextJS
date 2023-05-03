@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Img } from '../../components/atoms';
+import Save from '../molecules/C/Save';
 
 export default function Product({ data }) {
   const opiniones = ['Precio', 'Amazing', 'WoW', 'Interesante'];
@@ -11,6 +12,9 @@ export default function Product({ data }) {
           <h1 className='p-4 px-6 bg-main  z-10 relative text-2xl'>{data.name + ' ' + data.year}</h1>
           <div className='pb-6 grid grid-cols-1  text-black '>
             <div className='w-full h-72 sm:h-96 shadow-inner border-b relative flex items-center'>
+              <div className='absolute left-5 top-5 shadow-xl z-20'>
+                <Save id={data.id} cat={data.c} contrast={true} />
+              </div>
               <Img className='w-full h-full object-cover object-top sm:object-center absolute' w='600' h='400' src={data.img}></Img>
             </div>
 

@@ -11,6 +11,7 @@ export const headerMenu = [
   /*   { title: 'Home', img: 'choose', url: '/', icon: HomeRoundedIcon }, */
   { title: 'Ver', img: 'prices', url: 'see', icon: ApartmentOutlinedIcon },
   { title: 'hacer', img: 'questions', url: 'do', icon: DirectionsWalkOutlinedIcon },
+  { title: 'Saved', img: 'questions', url: 'Saved', icon: DirectionsWalkOutlinedIcon },
 ];
 //Home
 export const head = { title: 'See&Do', meta: 'Web de visitas', icon: 'favicon' };

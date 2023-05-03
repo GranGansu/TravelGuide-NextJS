@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Cards } from '../../components/layout/';
 import { Filters } from '../../components/organisms/';
+import Head from 'next/head';
 
 export default function Do() {
   const filtros = [
@@ -12,7 +13,10 @@ export default function Do() {
   ];
   const [filter, setFilter] = useState(filtros);
   return (
-    <div className='bg-slate-700'>
+    <div className='bg-slate-700 flex-grow'>
+      <Head>
+        <title>Do</title>
+      </Head>
       <div className='pt-6 flex flex-col sm:items-center'>
         <p className='pl-7 mb-2'>
           Mostrando <span className='text-gray-500'>click para desmarcar</span>

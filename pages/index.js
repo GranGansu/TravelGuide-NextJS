@@ -16,7 +16,9 @@ const Home = forwardRef(function Home(props, ref) {
         <div>
           <Banner></Banner>
         </div>
-        <Cards row={true}></Cards>
+        <div className='bg-main'>
+          <Cards row={true}></Cards>
+        </div>
         <Benefits></Benefits>
         <FixedBg img='movies.jpg'></FixedBg>
       </div>

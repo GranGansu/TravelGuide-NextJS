@@ -13,7 +13,7 @@ export default function See() {
   ];
   const [filter, setFilter] = useState(filtros);
   return (
-    <div className='bg-slate-700'>
+    <div className='bg-slate-700 flex-grow'>
       <Head>
         <title>See</title>
       </Head>
