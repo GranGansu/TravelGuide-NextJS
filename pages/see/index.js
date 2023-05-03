@@ -30,7 +30,7 @@ export default function See({ dataz }) {
 }
 
 export async function getStaticProps() {
-  const see = await axios.get(`http://localhost:3000/api/all?cat=see`);
+  const see = await axios.get(`/api/all?cat=see`);
   const dataz = see.data;
   return {
     props: { dataz: dataz },

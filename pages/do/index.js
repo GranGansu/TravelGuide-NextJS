@@ -30,7 +30,7 @@ export default function Do({ dataz }) {
   );
 }
 export async function getStaticProps() {
-  const doo = await axios.get(`http://localhost:3000/api/all?cat=do`);
+  const doo = await axios.get(`/api/all?cat=do`);
   const dataz = doo.data;
   return {
     props: { dataz: dataz },
