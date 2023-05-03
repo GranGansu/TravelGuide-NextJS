@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Cards } from '../../components/layout/';
 import { Filters } from '../../components/organisms/';
 import Head from 'next/head';
+import Cardz from '../../components/layout/Cardz';
+import axios from 'axios';
 
-export default function See() {
+export default function See({ dataz }) {
   const filtros = [
     { id: 1, name: 'Museos' },
     { id: 2, name: 'Iglesias' },
@@ -23,7 +24,15 @@ export default function See() {
         </p>
         <Filters full={filtros} filters={filter} set={setFilter}></Filters>
       </div>
-      <Cards cat='see' filters={filter}></Cards>
+      <Cardz cat='see' dataz={dataz} filters={filter}></Cardz>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const see = await axios.get(`http://localhost:3000/api/all?cat=see`);
+  const dataz = see.data;
+  return {
+    props: { dataz: dataz },
+  };
 }

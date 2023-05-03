@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Cards } from '../../components/layout/';
 import { Filters } from '../../components/organisms/';
 import Head from 'next/head';
-
-export default function Do() {
+import Cardz from '../../components/layout/Cardz';
+import axios from 'axios';
+export default function Do({ dataz }) {
   const filtros = [
     { id: 1, name: 'Parques Diversión' },
     { id: 2, name: 'Cine' },
@@ -23,7 +24,15 @@ export default function Do() {
         </p>
         <Filters full={filtros} filters={filter} set={setFilter}></Filters>
       </div>
-      <Cards cat='do' filters={filter}></Cards>
+      {/*    <Cards cat='do' filters={filter}></Cards> */}
+      <Cardz cat='do' dataz={dataz} filters={filter}></Cardz>
     </div>
   );
+}
+export async function getStaticProps() {
+  const doo = await axios.get(`http://localhost:3000/api/all?cat=do`);
+  const dataz = doo.data;
+  return {
+    props: { dataz: dataz },
+  };
 }

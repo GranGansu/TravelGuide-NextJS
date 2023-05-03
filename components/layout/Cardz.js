@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Card } from '../molecules';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 
-export default function Cards({ row, filters, cat = 'all', ids, saveIcon = true, setToggle }) {
-  const [data, setData] = useState(null);
+export default function Cardz({ row, filters, dataz, ids, saveIcon = true, setToggle }) {
   const [dataFiltrada, setDataFiltrada] = useState(null);
   const processData = () => {
     setDataFiltrada(
-      data.filter((d) => {
+      dataz.filter((d) => {
         return (
           filters
             .map((f) => {
@@ -20,20 +18,14 @@ export default function Cards({ row, filters, cat = 'all', ids, saveIcon = true,
     );
   };
   useEffect(() => {
-    const ax = axios.get(`/api/all?${ids !== undefined ? `see=${ids[0]}&doo=${ids[1]}` : `cat=${cat}`}`);
-    ax.then((response) => {
-      setData(response.data);
-    });
-  }, [ids, cat]);
-  useEffect(() => {
-    if (data !== null) {
+    if (dataz !== null) {
       if (filters !== undefined) {
         processData();
       } else {
-        setDataFiltrada(data);
+        setDataFiltrada(dataz);
       }
     }
-  }, [filters, data]);
+  }, [filters, dataz]);
   return (
     <div className={`p-6 overflow-x-auto  ${row ? 'flex gap-x-4' : 'grid grid-cols-1 gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-fit w-full mx-auto gap-y-8'}`}>
       {dataFiltrada === null && (
