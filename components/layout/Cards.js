@@ -56,7 +56,7 @@ export default function Cards({ row, filters, cat = 'all', ids, saveIcon = true,
         dataFiltrada.map((element) => {
           return (
             <Card
-              key={element.title}
+              key={element.name}
               ids={ids}
               saveIcon={saveIcon}
               must={element.must}

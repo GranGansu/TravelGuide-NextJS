@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Filters } from '../../components/organisms/';
 import Head from 'next/head';
 import Cardz from '../../components/layout/Cardz';
-import axios from 'axios';
 
 export default function See({ dataz }) {
   const filtros = [
