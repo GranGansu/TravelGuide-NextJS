@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useState, useMemo } from 'react';
 import useCountSaved from '../../hooks/useCountSaved';
 
-export default function C({ id, title, img, cat, must, saveIcon, setToggle, priority }) {
+export default function C({ id, title, img, cat, must, saveIcon, setRefresh, priority }) {
   const setSaved = useCountSaved();
   const [checked, setChecked] = useState(false);
   const [background, setBackground] = useState(false);
@@ -18,7 +18,7 @@ export default function C({ id, title, img, cat, must, saveIcon, setToggle, prio
         return p !== id;
       })
     );
-    setToggle((prev) => !prev);
+    setRefresh((prev) => !prev);
   };
   const variants = { active: { opacity: 1, scale: 5.5 }, inactive: { opacity: 0, scale: 0 } };
   const carta = useMemo(() => {
@@ -42,14 +42,7 @@ export default function C({ id, title, img, cat, must, saveIcon, setToggle, prio
             <Img priority={priority} src={img ? img : 'Poster.jpg'} w={256} h={240} className='sm:w-72 w-full h-72 rounded object-cover'></Img>
             {must && <Must />}
             {saveIcon ? (
-              <div
-                onMouseEnter={() => {
-                  setBackground(true);
-                }}
-                onMouseLeave={() => {
-                  setBackground(false);
-                }}
-                className='absolute bottom-0 mb-6 flex gap-x-4 justify-center w-full fill-white '>
+              <div className='absolute bottom-0 mb-6 flex gap-x-4 justify-center w-full fill-white '>
                 <Save id={id} cat={cat} setChecked={setChecked} checked={checked} />
               </div>
             ) : (
@@ -63,6 +56,6 @@ export default function C({ id, title, img, cat, must, saveIcon, setToggle, prio
         </Link>
       </div>
     );
-  }, [id]);
+  }, [id, checked]);
   return <div>{carta}</div>;
 }

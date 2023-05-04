@@ -6,8 +6,24 @@ import { useState } from 'react';
 import { Menu } from '../molecules';
 import { Absolute, Img } from '../atoms';
 import { useRouter } from 'next/router';
+import { useModal } from '../hooks';
+
 export default function Header() {
   const router = useRouter();
+  const [modal, setModal] = useModal(
+    false,
+    <div className='fixed top-0 bg-black/90 w-full h-full flex items-center justify-center z-30'>
+      <div>
+        <Img mot={true} src='hell.jpg' className='absolute bottom-0 w-full left-0'></Img>
+      </div>
+      <div className='absolute right-0 top-0 p-4 text-4xl'>
+        <HighlightOffIcon></HighlightOffIcon>
+      </div>
+      <ul className='flex flex-col space-y-6 items-center text-center justify-center'>
+        <Menu></Menu>
+      </ul>
+    </div>
+  );
   const [visible, setVisible] = useState(false);
   return (
     <div className={`m-auto  text-headerUl  z-50 `}>
@@ -33,24 +49,7 @@ export default function Header() {
       </div>
 
       {/*Mobile only*/}
-      {visible && (
-        <div
-          onClick={() => {
-            setVisible(false);
-            document.body.style.overflow = 'auto';
-          }}
-          className='fixed top-0 bg-black/90 w-full h-full flex items-center justify-center z-30'>
-          <div>
-            <Img mot={true} src='hell.jpg' className='absolute bottom-0 w-full left-0'></Img>
-          </div>
-          <div className='absolute right-0 top-0 p-4 text-4xl'>
-            <HighlightOffIcon></HighlightOffIcon>
-          </div>
-          <ul className='flex flex-col space-y-6 items-center text-center justify-center'>
-            <Menu></Menu>
-          </ul>
-        </div>
-      )}
+      {modal}
     </div>
   );
 }

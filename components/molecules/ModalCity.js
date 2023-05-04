@@ -7,11 +7,11 @@ export default function ModalCity() {
     { name: 'Madrid', url: '/madrid' },
   ];
   const menu = (
-    <ul className='text-2xl gap-y-2 flex flex-col'>
+    <ul className='text-2xl gap-y-6 flex flex-col'>
       {cities.map((city) => {
         return (
           <Link key={city.url} href={city.url}>
-            <li className='hover:scale-110 hover:cursor-pointer text-2xl'>{city.name}</li>
+            <li className='hover:scale-110 hover:cursor-pointer text-3xl'>{city.name}</li>
           </Link>
         );
       })}

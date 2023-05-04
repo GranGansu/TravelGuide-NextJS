@@ -37,7 +37,6 @@ export default function Save({ id, cat, contrast = false, setChecked = () => {},
         }
         const arr = JSON.parse(localStorage[cat]);
         if (!arr.includes(id)) {
-          console.log(arr);
           arr.push(id);
         }
         if (!visible) {

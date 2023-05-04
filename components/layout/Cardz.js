@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card } from '../molecules';
 import Loading from '../molecules/Loading';
 
-export default function Cardz({ row, filters, dataz, ids, saveIcon = true, setToggle }) {
+export default function Cardz({ row, filters, dataz, saveIcon = true, setRefresh }) {
   const [dataFiltrada, setDataFiltrada] = useState(null);
   const processData = () => {
     setDataFiltrada(
@@ -37,15 +37,14 @@ export default function Cardz({ row, filters, dataz, ids, saveIcon = true, setTo
           return (
             <Card
               priority={key === 0 && true}
-              key={element.name}
-              ids={ids}
+              key={element.id}
               saveIcon={saveIcon}
               must={element.must}
               title={element.name}
               id={element.id}
               img={element.img}
               cat={element.c}
-              setToggle={setToggle}></Card>
+              setRefresh={setRefresh}></Card>
           );
         })}
       {dataFiltrada !== null && dataFiltrada.length === 0 && <p className='h-full text-center mx-auto col-span-full'>Ningún artículo que mostrar</p>}
