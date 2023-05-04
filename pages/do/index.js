@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { Cards } from '../../components/layout/';
 import { Filters } from '../../components/organisms/';
 import Head from 'next/head';
 import Cardz from '../../components/layout/Cardz';
-import axios from 'axios';
 export default function Do({ dataz }) {
   const filtros = [
     { id: 1, name: 'Parques Diversión' },
@@ -17,6 +15,7 @@ export default function Do({ dataz }) {
     <div className='bg-slate-700 flex-grow'>
       <Head>
         <title>Do</title>
+        <meta name='description' content='Planes para hacer en Barcelona'></meta>
       </Head>
       <div className='pt-6 flex flex-col sm:items-center'>
         <p className='pl-7 mb-2'>
@@ -24,7 +23,6 @@ export default function Do({ dataz }) {
         </p>
         <Filters full={filtros} filters={filter} set={setFilter}></Filters>
       </div>
-      {/*    <Cards cat='do' filters={filter}></Cards> */}
       <Cardz cat='do' dataz={dataz} filters={filter}></Cardz>
     </div>
   );
@@ -38,7 +36,7 @@ export async function getStaticProps() {
         { id: 1, c: 'do', must: true, cat: 2, name: 'Cinesa Diagonal', description: 'Esta película de 1993 estrenada en EEUU', year: 1992, img: 'cinesa.webp' },
         { id: 2, c: 'do', must: false, cat: 1, name: 'Tibidabo', description: 'Esta película de 1993 estrenada en EEUU', year: 1992, img: 'tibidabo.jpeg' },
         { id: 3, c: 'do', must: false, cat: 1, name: 'Port Aventura', description: 'Descripción de este gran videojuego', year: 1992, img: 'port.jpg' },
-        { id: 4, c: 'do', must: true, cat: 5, name: 'Barceloneta', description: 'Descripción de este gran videojuego', year: 1992, img: 'barceloneta.jpg' },
+        { id: 4, c: 'do', must: true, cat: 5, name: 'Barceloneta', description: 'Descripción de esta gran playa', year: 1992, img: 'barceloneta.jpg' },
       ],
     },
   };

@@ -13,8 +13,8 @@ export default function Menu() {
     const Icon = i.icon;
     const active = '/' + i.url === current;
     return (
-      <Link key={key} href={`/${i.url ? i.url : i.title}`}>
-        <motion.li className={` sm:border-0 h-full flex justify-center p-4  ${active && 'bg-gray-600'}`}>
+      <motion.li key={key} className={` sm:border-0 h-full flex justify-center  ${active && 'bg-gray-600'}`}>
+        <Link href={`/${i.url ? i.url : i.title}`} className='w-full h-full p-4 flex items-center justify-center'>
           <div className='flex gap-x-2 items-center'>
             {i.url !== 'Saved' && (
               <p className={`font-bold text-center text-2xl sm:text-2xl capitalize ${active ? ' text-red-100  underline-offset-4' : 'text-white '}`}>{i.title}</p>
@@ -29,8 +29,8 @@ export default function Menu() {
               </div>
             )}
           </div>
-        </motion.li>
-      </Link>
+        </Link>
+      </motion.li>
     );
   });
 }

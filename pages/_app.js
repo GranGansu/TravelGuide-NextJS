@@ -1,7 +1,5 @@
 import { Poppins } from 'next/font/google';
 import '../styles/globals.css';
-/* const rubik = Rubik({ preload: true, subsets: ['latin'], weight: '400' });
-const abel = Abel({ preload: true, subsets: ['latin'], weight: '400' }); */
 const poppins = Poppins({ preload: true, subsets: ['latin'], weight: '400' });
 import { Header, Footer } from '../components/organisms';
 import Page from '../components/layout/Page';

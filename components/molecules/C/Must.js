@@ -10,7 +10,7 @@ export default function Must() {
             fillRule='nonzero'
           />
         </svg>
-        <p>MUST</p>
+        <p className='text-white'>MUST</p>
       </div>
     </Absolute>
   );
