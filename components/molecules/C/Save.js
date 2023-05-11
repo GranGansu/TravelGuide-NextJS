@@ -20,7 +20,7 @@ export default function Save({ id, cat, contrast = false, setChecked = () => {},
   const Save = () => {
     return visible ? (
       <>
-        <BookmarkIcon className='fill-yellow-300' />
+        <BookmarkIcon className={`fill-yellow-300  ${contrast && 'scale-125'}`} />
         <p>Guardado</p>
       </>
     ) : (
@@ -40,7 +40,9 @@ export default function Save({ id, cat, contrast = false, setChecked = () => {},
   }, [cat, id, city]);
   return (
     <div
-      className={`flex gap-x-2 hover:cursor-pointer rounded p-2 border ${visible && 'border-yellow-300'}   ${contrast ? 'bg-red-100' : 'bg-black/20 hover:bg-black/30'}`}
+      className={`flex gap-x-2 hover:cursor-pointer text-white rounded p-2 border ${visible && 'border-yellow-300 text-yellow-300'}   ${
+        contrast ? 'bg-red-0 backdrop-blur-md' : 'bg-black/20 text-white hover:bg-black/30'
+      }`}
       onClick={(e) => {
         e.preventDefault();
         guardadoConCiudad();

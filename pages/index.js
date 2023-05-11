@@ -3,7 +3,7 @@ import { head } from '../configs/globals';
 import { Banner, FixedBg, Benefits } from '../components/organisms';
 import { Cards } from '../components/layout/';
 import { forwardRef } from 'react';
-import { hacer, ver } from './api/all';
+import { hacer, ver, hacerr, verr } from './api/all';
 
 const Home = forwardRef(function Home(props, ref) {
   return (
@@ -29,9 +29,10 @@ const Home = forwardRef(function Home(props, ref) {
 
 export default Home;
 export async function getStaticProps() {
+  const todos = Object.values(verr).flat().concat(Object.values(hacerr).flat());
   return {
     props: {
-      rawData: [...hacer, ...ver],
+      rawData: todos,
     },
   };
 }

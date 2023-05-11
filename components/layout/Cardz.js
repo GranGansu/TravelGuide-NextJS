@@ -27,7 +27,8 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
     }
   }, [filters, rawData]);
   return (
-    <div className={`p-6 overflow-x-auto  ${row ? 'flex gap-x-4' : 'grid grid-cols-1 gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-fit w-full mx-auto gap-y-8'}`}>
+    <div
+      className={`p-6 overflow-x-auto  mx-auto  ${row ? 'flex gap-x-4' : 'grid grid-cols-1 gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-fit w-full mx-auto gap-y-8'}`}>
       {dataFiltrada === null && (
         <div className='mx-auto col-span-full py-14'>
           <Loading />
@@ -36,12 +37,13 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
       {dataFiltrada !== null &&
         dataFiltrada.length !== 0 &&
         dataFiltrada.map((element, key) => {
-          const kk = key + '0' + element.id + element.name.length;
           return (
             <Card
+              row={row}
               city={category !== undefined ? category : element.cc}
+              ecity={element.city}
               priority={key === 0 && true}
-              key={kk}
+              key={key + '0' + element.id + element.name.length}
               saveIcon={saveIcon}
               must={element.must}
               title={element.name}

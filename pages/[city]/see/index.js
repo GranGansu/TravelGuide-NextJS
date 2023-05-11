@@ -19,7 +19,7 @@ export default function See({ rawData, category }) {
         <title>See</title>
         <meta name='description' content='Planes para ver en Barcelona'></meta>
       </Head>
-      <div className='pt-6 flex flex-col sm:items-center'>
+      <div className='pt-8 pb-2 flex flex-col sm:items-center'>
         <p className='pl-7 mb-2'>
           Mostrando <span className='text-gray-500'>click para desmarcar</span>
         </p>

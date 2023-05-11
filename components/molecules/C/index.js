@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { useState, useMemo } from 'react';
 import useCountSaved from '../../hooks/useCountSaved';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-export default function C({ id, title, img, cat, must, saveIcon, setRefresh, priority, city }) {
+export default function C({ id, title, img, cat, must, saveIcon, setRefresh, priority, city, row, ecity }) {
   const [a, setSaved] = useCountSaved();
   const [checked, setChecked] = useState(false);
   const [background, setBackground] = useState(false);
@@ -24,7 +24,7 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
   const variants = { active: { opacity: 1, scale: 5.5 }, inactive: { opacity: 0, scale: 0 } };
   const carta = useMemo(() => {
     return (
-      <div className='flex-shrink-0 w-full'>
+      <div className={`flex-shrink-0 ${row ? 'w-fit' : 'w-full'}`}>
         <h1 className='text-2xl pl-2'>{title}</h1>
         <Link href={`/${city}/${cat}/${id}`}>
           <div className='relative sm:w-fit w-full from-red-100 to-blue-500 sm:hover:bg-gradient-to-br rounded p-2' style={{ background: background ? 'transparent' : '' }}>
@@ -57,9 +57,9 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
     );
   }, [id, checked, a]);
   return (
-    <div className='flex-shrink-0 w-full'>
+    <div className={`flex-shrink-0 ${row ? 'w-fit' : 'w-full'}`}>
       <h1 className='text-2xl pl-2'>{title}</h1>
-      <Link href={`/${city}/${cat}/${id}`}>
+      <Link href={`/${city ? city : ecity}/${cat}/${id}`}>
         <div className='relative sm:w-fit w-full from-red-100 to-blue-500 sm:hover:bg-gradient-to-br rounded p-2' style={{ background: background ? 'transparent' : '' }}>
           <Absolute>
             <motion.div
@@ -75,7 +75,7 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
           {must && <Must />}
           {saveIcon ? (
             <div className='absolute bottom-0 mb-6 flex gap-x-4 justify-center w-full fill-white '>
-              <Save city={city} id={id} cat={cat} setChecked={setChecked} checked={checked} />
+              <Save city={city ? city : ecity} id={id} cat={cat} setChecked={setChecked} checked={checked} />
             </div>
           ) : (
             <div className='flex gap-x-2 mt-2 justify-stretch z-10 relative'>
