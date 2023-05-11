@@ -1,29 +1,31 @@
+import useGetCity from 'components/hooks/useGetCity';
 import { useEffect, useState } from 'react';
-import { Card } from '../molecules';
-import Loading from '../molecules/Loading';
-
-export default function Cardz({ row, filters, dataz, saveIcon = true, setRefresh }) {
+import { Card, Loading } from '../molecules';
+import { hacer, ver } from 'pages/api/all';
+export default function Cardz({ row, filters, rawData, saveIcon = true, setRefresh, category }) {
   const [dataFiltrada, setDataFiltrada] = useState(null);
-  const processData = () => {
-    setDataFiltrada(
-      dataz.filter((d) => {
-        return (
-          filters
-            .map((f) => {
-              return f.id;
-            })
-            .includes(d.cat) && d
-        );
-      })
-    );
-  };
+  const [city, setCity] = useGetCity();
   useEffect(() => {
     if (filters !== undefined) {
-      processData();
+      setDataFiltrada(
+        rawData.filter((d) => {
+          return (
+            filters
+              .map((f) => {
+                return f.id;
+              })
+              .includes(d.cat) && d
+          );
+        })
+      );
     } else {
-      setDataFiltrada(dataz);
+      if (rawData !== undefined) {
+        setDataFiltrada(rawData);
+      } else {
+        setDataFiltrada([...hacer, ...ver]);
+      }
     }
-  }, [filters, dataz]);
+  }, [filters, rawData]);
   return (
     <div className={`p-6 overflow-x-auto  ${row ? 'flex gap-x-4' : 'grid grid-cols-1 gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-fit w-full mx-auto gap-y-8'}`}>
       {dataFiltrada === null && (
@@ -34,10 +36,12 @@ export default function Cardz({ row, filters, dataz, saveIcon = true, setRefresh
       {dataFiltrada !== null &&
         dataFiltrada.length !== 0 &&
         dataFiltrada.map((element, key) => {
+          const kk = key + '0' + element.id + element.name.length;
           return (
             <Card
+              city={category !== undefined ? category : element.cc}
               priority={key === 0 && true}
-              key={element.id}
+              key={kk}
               saveIcon={saveIcon}
               must={element.must}
               title={element.name}

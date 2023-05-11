@@ -3,6 +3,7 @@ import { head } from '../configs/globals';
 import { Banner, FixedBg, Benefits } from '../components/organisms';
 import { Cards } from '../components/layout/';
 import { forwardRef } from 'react';
+import { hacer, ver } from './api/all';
 
 const Home = forwardRef(function Home(props, ref) {
   return (
@@ -17,7 +18,7 @@ const Home = forwardRef(function Home(props, ref) {
           <Banner></Banner>
         </div>
         <div className='bg-main'>
-          <Cards row={true}></Cards>
+          <Cards rawData={props.rawData} row={true}></Cards>
         </div>
         <Benefits></Benefits>
         <FixedBg img='movies.jpg'></FixedBg>
@@ -27,3 +28,10 @@ const Home = forwardRef(function Home(props, ref) {
 });
 
 export default Home;
+export async function getStaticProps() {
+  return {
+    props: {
+      rawData: [...hacer, ...ver],
+    },
+  };
+}

@@ -2,19 +2,18 @@ import { motion } from 'framer-motion';
 import { headerMenu, showIcons } from '../../configs/globals';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
-import { SavedContext } from '../../pages/_app';
-
-export default function Menu() {
-  const [saved] = useContext(SavedContext);
+import { useCountSaved } from '../hooks';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+export default function Menu({ city }) {
+  const [saved] = useCountSaved();
   const router = useRouter();
   const current = router.pathname;
   return headerMenu.map((i, key) => {
     const Icon = i.icon;
-    const active = '/' + i.url === current;
+    const active = '/[city]/' + i.url === current || current === '/' + i.title;
     return (
       <motion.li key={key} className={` sm:border-0 h-full flex justify-center  ${active && 'bg-gray-600'}`}>
-        <Link href={`/${i.url ? i.url : i.title}`} className='w-full h-full p-4 flex items-center justify-center'>
+        <Link href={`/${i.url !== 'Saved' ? city + '/' : ''}${i.url}`} className='w-full h-full p-4 flex items-center justify-center'>
           <div className='flex gap-x-2 items-center'>
             {i.url !== 'Saved' && (
               <p className={`font-bold text-center text-2xl sm:text-2xl capitalize ${active ? ' text-red-100  underline-offset-4' : 'text-white '}`}>{i.title}</p>
@@ -22,9 +21,7 @@ export default function Menu() {
             {i.icon && showIcons && <Icon className='fill-white border border-slate-300 rounded-full p-2 box-content shadow-inner'></Icon>}
             {i.url === 'Saved' && (
               <div className='flex  items-center justify-center'>
-                <svg className='z-10 relative fill-white' xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'>
-                  <path d='M5.495 2h16.505v-2h-17c-1.656 0-3 1.343-3 3v18c0 1.657 1.344 3 3 3h17v-20h-16.505c-1.376 0-1.376-2 0-2zm.505 4h7v7l2-2 2 2v-7h3v16h-14v-16z' />
-                </svg>
+                <BookmarkIcon></BookmarkIcon>
                 <div className='pl-1 rounded-xl text-2xl font-bold'>{saved}</div>
               </div>
             )}

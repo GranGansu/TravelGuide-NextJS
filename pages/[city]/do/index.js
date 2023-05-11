@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Filters } from '../../components/organisms/';
+import { Filters } from 'components/organisms';
 import Head from 'next/head';
-import Cardz from '../../components/layout/Cardz';
-import { hacer } from '../api/all';
+import Cardz from 'components/layout/Cardz';
+import { hacerr, paths } from 'pages/api/all';
 
-export default function Do({ dataz }) {
+export default function Do({ rawData, category }) {
   const filtros = [
     { id: 1, name: 'Parques Diversión' },
     { id: 2, name: 'Cine' },
@@ -25,14 +25,24 @@ export default function Do({ dataz }) {
         </p>
         <Filters full={filtros} filters={filter} set={setFilter}></Filters>
       </div>
-      <Cardz cat='do' dataz={dataz} filters={filter}></Cardz>
+      <Cardz category={category} rawData={rawData} filters={filter}></Cardz>
     </div>
   );
 }
-export async function getStaticProps() {
+export async function getStaticPaths() {
+  return {
+    paths: paths.map((p) => {
+      return `/${p.name.toLowerCase()}/do`;
+    }),
+    fallback: false,
+  };
+}
+export async function getStaticProps({ params }) {
+  const ciudad = params.city;
   return {
     props: {
-      dataz: hacer,
+      rawData: hacerr[ciudad],
+      category: ciudad,
     },
   };
 }

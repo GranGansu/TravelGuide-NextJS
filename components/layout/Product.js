@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Img } from '../../components/atoms';
 import Save from '../molecules/C/Save';
 
-export default function Product({ data }) {
+export default function Product({ data, city }) {
   const opiniones = ['Precio', 'Amazing', 'WoW', 'Interesante'];
 
   return (
@@ -13,7 +13,7 @@ export default function Product({ data }) {
           <div className='pb-6 grid grid-cols-1  text-black '>
             <div className='w-full h-72 sm:h-96 shadow-inner border-b relative flex items-center'>
               <div className='absolute left-5 top-5 shadow-xl z-20'>
-                <Save id={data.id} cat={data.c} contrast={true} />
+                <Save city={city} id={data.id} cat={data.c} contrast={true} />
               </div>
               <Img className='w-full h-full object-cover object-top sm:object-center absolute' w='600' h='400' src={data.img}></Img>
             </div>

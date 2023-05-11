@@ -3,12 +3,12 @@ import Link from 'next/link';
 import MenuIcon from '@mui/icons-material/Menu';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useState } from 'react';
-import { Menu } from '../molecules';
-import { Absolute, Img } from '../atoms';
+import { Menu } from 'components/molecules';
+import { Img } from '../atoms';
 import { useRouter } from 'next/router';
 import { useModal } from '../hooks';
 
-export default function Header() {
+export default function Header({ city }) {
   const router = useRouter();
   const [modal, setModal] = useModal(
     false,
@@ -20,7 +20,7 @@ export default function Header() {
         <HighlightOffIcon></HighlightOffIcon>
       </div>
       <ul className='flex flex-col space-y-6 items-center text-center justify-center'>
-        <Menu></Menu>
+        <Menu city={city}></Menu>
       </ul>
     </div>
   );
@@ -29,7 +29,7 @@ export default function Header() {
     <div className={`m-auto  text-headerUl  z-50 `}>
       <div className=' relative z-40'>
         <ul className='w-full  grid grid-cols-3 relative sm:max-w-4xl sm:mx-auto'>
-          <Menu></Menu>
+          <Menu city={city}></Menu>
         </ul>
         <div className='hidden w-full grid grid-cols-3 items-center relative z-0'>
           <div

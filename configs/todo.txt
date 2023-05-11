@@ -2,7 +2,10 @@
 2.- No scrollbar
 3.- Tipografía
 4.- Qué es más barato que en mi país? seccion especial
-5.- Saved solo funciona cuando hay más de uno
+5.- Corregir Saved, guardados en ciudad
+
+
+
 Comandos:
 npm i 
 npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
