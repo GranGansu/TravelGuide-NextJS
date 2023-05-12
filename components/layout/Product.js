@@ -1,18 +1,46 @@
 import { motion } from 'framer-motion';
 import { Img } from '../../components/atoms';
 import Save from '../molecules/C/Save';
-
+import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 export default function Product({ data, city }) {
-  const opiniones = ['Precio', 'Amazing', 'WoW', 'Interesante'];
-
+  const opiniones = { precio: 5, cultura: 84, compras: 91, imprescindible: 60 };
+  const razones = ['Buen ambiente', 'Mucho sol'];
+  const frame = ({ icon, title, razon, description, warning = false }) => {
+    return (
+      <div className={`p-4 px-6  border bg-gray-100 text-black flex flex-col ${warning && 'border-red-300 border-4 rounded-xl'}`}>
+        <h3 className=' text-2xl'>
+          {icon} {title}
+        </h3>
+        <div className='my-2'>
+          <ul className='flex gap-x-2'>
+            {razon.map((r) => {
+              return (
+                <li className='p-1 border border-inherit font-bold text-gray-500 text-sm bg-white rounded px-2' key={r}>
+                  {r}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        {description}
+      </div>
+    );
+  };
   return (
     <div className='sm:max-w-6xl w-full h-full flex-grow sm:mx-auto relative flex flex-col'>
-      {data !== null && data !== undefined ? (
+      {data ? (
         <>
-          <h1 className='p-4 px-6 bg-main  z-10 relative text-2xl'>{data.name + ' ' + data.year}</h1>
+          {/*           <h1 className='p-4 px-6 bg-main  z-10 relative text-2xl'>
+            {data.name}
+            <span className='text-gray-400'> ({data.year})</span>
+          </h1> */}
+          <h1 className='p-4 px-6 absolute  z-10  text-2xl'>
+            {data.name}
+            {/*      <span className='text-gray-400'> ({data.year})</span> */}
+          </h1>
           <div className='pb-6 grid grid-cols-1  text-black '>
             <div className='w-full h-72 sm:h-96 shadow-inner border-b relative flex items-center'>
-              <div className='absolute left-5 top-5 shadow-xl z-20'>
+              <div className='absolute right-4 bottom-10 shadow-xl z-20'>
                 <Save city={city} id={data.id} cat={data.c} contrast={true} />
               </div>
               <Img className='w-full h-full object-cover object-top sm:object-center absolute' w='600' h='400' src={data.img}></Img>
@@ -20,20 +48,31 @@ export default function Product({ data, city }) {
 
             <div className='flex flex-col gap-y-4 text-justify mx-4 -mt-6 z-10'>
               <p className='p-4 px-6  border bg-gray-100 text-black flex items-center rounded text-md leading-7'>{data.description}</p>
-              <div className='p-4 px-6  border bg-gray-100 text-black flex flex-col'>
-                <h3 className='font-bold'>Crítica</h3>
-                {data.description}
-              </div>
-              <p className='text-lg font-bold'>Elige una razón para visitar</p>
-              <div className='grid grid-cols-2 gap-4'>
-                {opiniones.map((o, key) => {
-                  return (
-                    <div className='p-4 border rounded-md flex justify-between' key={key}>
-                      <p>{o}</p>
-                      <p className='text-xl'>98%</p>
-                    </div>
-                  );
-                })}
+              {frame({ icon: <WarningAmberIcon />, warning: true, title: 'Debes saber', razon: ['Buen ambiente', 'Mucho sol'] })}
+              {frame({ title: 'Por qué visitarla', razon: ['Buen ambiente', 'Mucho sol'], description: data.description })}
+              <div className='shadow-xl p-6 rounded-lg mt-6 border'>
+                <p className='text-lg mb-4'>Elige una razón para visitar {data.name}</p>
+                <div className='grid sm:grid-cols-2 gap-4'>
+                  {Object.keys(opiniones)
+                    .sort((a, b) => {
+                      console.log(opiniones[a]);
+                      return opiniones[b] - opiniones[a];
+                    })
+                    .map((opinion, key) => {
+                      const number = opiniones[opinion];
+                      return (
+                        <div
+                          className='overflow-hidden relative p-4 hover:cursor-pointer select-none border-2 rounded-md flex  justify-between hover:border-black/20 hover:bg-gray-50'
+                          key={key}>
+                          <div className='relative z-10 flex justify-between w-full'>
+                            <p className='capitalize'>{opinion}</p>
+                            <p className='text-xl'>{number}%</p>
+                          </div>
+                          <div className='absolute h-full left-0 top-0 z-0 rounded-r-md' style={{ width: number + '%', background: 'red', opacity: number + '%' }}></div>
+                        </div>
+                      );
+                    })}
+                </div>
               </div>
             </div>
           </div>

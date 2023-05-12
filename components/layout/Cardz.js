@@ -28,7 +28,7 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
   }, [filters, rawData]);
   return (
     <div
-      className={`p-6 overflow-x-auto  mx-auto  ${row ? 'flex gap-x-4' : 'grid grid-cols-1 gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-fit w-full mx-auto gap-y-8'}`}>
+      className={`p-6 overflow-x-auto  mx-auto  ${row ? 'flex gap-x-4' : 'grid grid-cols-1 gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-fit w-full mx-auto gap-y-4'}`}>
       {dataFiltrada === null && (
         <div className='mx-auto col-span-full py-14'>
           <Loading />

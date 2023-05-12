@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import Cardz from '../components/layout/Cardz';
 import { hacerr, verr } from './api/all';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import HistoryIcon from '@mui/icons-material/History';
 import { useCountSaved } from 'components/hooks';
 export default function Saved() {
   const [rawData, setrawData] = useState([]);
@@ -46,14 +47,28 @@ export default function Saved() {
           <span className='bg-gray-700/90 rounded p-2 px-4 text-lg border border-gray-500'>Guardados</span>
         </h1>
         <div
-          className='p-2 bg-red-400 rounded border border-gray-500 hover:cursor-pointer'
+          className='p-2 flex w-fit bg-gray-800 hover:bg-red-400 rounded border border-gray-500 hover:cursor-pointer'
           onClick={() => {
+            localStorage.doPREV = localStorage.doNUEVO;
+            localStorage.seePREV = localStorage.seeNUEVO;
             localStorage.doNUEVO = JSON.stringify({});
             localStorage.seeNUEVO = JSON.stringify({});
             setRefresh((prev) => !prev);
             setSaved((prev) => !prev);
           }}>
-          <DeleteForeverIcon></DeleteForeverIcon>
+          <DeleteForeverIcon />
+          <p>All</p>
+        </div>
+        <div
+          className='p-2 flex w-fit bg-gray-800 hover:bg-blue-400 rounded border border-gray-500 hover:cursor-pointer'
+          onClick={() => {
+            localStorage.doNUEVO = localStorage.doPREV;
+            localStorage.seeNUEVO = localStorage.seePREV;
+            setRefresh((prev) => !prev);
+            setSaved((prev) => !prev);
+          }}>
+          <HistoryIcon />
+          <p>Recuperar</p>
         </div>
       </div>
       {rawData.join('').length !== 0 ? listaGuardados : <div className='p-6 h-full'>Nada guardado de momento</div>}

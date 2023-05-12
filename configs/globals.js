@@ -21,5 +21,5 @@ const dark = { bg: 'gray', headerUl: 'white' };
 const light = { class: 'bg-gray-500' };
 export const theme = dark;
 //Banner
-export const title1 = 'Tu gimnasio';
+export const title1 = 'Guarda tus planes favoritos';
 export const title2 = 'Abierto 24hs';

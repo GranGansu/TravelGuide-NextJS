@@ -87,7 +87,17 @@ export const verr = {
     { city: 'canarias', id: 4, c: 'see', must: true, cat: 3, name: 'Volcán Calderón Hondo', description: 'Descripción de este gran videojuego', year: 1992, img: 'volcan.jpg' },
   ],
   madrid: [
-    { city: 'madrid', id: 1, c: 'see', must: true, cat: 2, name: 'Puerta del Sol', description: 'Esta película de 1993 estrenada en EEUU', year: 1992, img: 'puerta.jpg' },
+    {
+      city: 'madrid',
+      id: 1,
+      c: 'see',
+      must: true,
+      cat: 2,
+      name: 'Puerta del Sol',
+      description: 'La Puerta del Sol es una plaza de la ciudad española de Madrid. ',
+      year: 1776,
+      img: 'puerta.jpg',
+    },
     { city: 'madrid', id: 2, c: 'see', must: false, cat: 1, name: 'Plaza Mayor', description: 'Esta película de 1993 estrenada en EEUU', year: 1992, img: 'plaza.jpg' },
     { city: 'madrid', id: 3, c: 'see', must: false, cat: 1, name: 'Gran Vía', description: 'Descripción de este gran videojuego', year: 1992, img: 'gran.jpg' },
     { city: 'madrid', id: 4, c: 'see', must: true, cat: 5, name: 'Templo de Debod', description: 'Descripción de este gran videojuego', year: 1992, img: 'templo.jpg' },

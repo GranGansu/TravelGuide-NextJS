@@ -28,7 +28,7 @@ export default function Header({ city }) {
   return (
     <div className={`m-auto  text-headerUl  z-50 `}>
       <div className=' relative z-40'>
-        <ul className='w-full  grid grid-cols-3 relative sm:max-w-4xl sm:mx-auto'>
+        <ul className='w-full grid grid-cols-3 relative sm:max-w-4xl sm:mx-auto'>
           <Menu city={city}></Menu>
         </ul>
         <div className='hidden w-full grid grid-cols-3 items-center relative z-0'>

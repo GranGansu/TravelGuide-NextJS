@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useState, useMemo } from 'react';
 import useCountSaved from '../../hooks/useCountSaved';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import ClearIcon from '@mui/icons-material/Clear';
 export default function C({ id, title, img, cat, must, saveIcon, setRefresh, priority, city, row, ecity }) {
   const [a, setSaved] = useCountSaved();
   const [checked, setChecked] = useState(false);
@@ -58,32 +59,40 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
   }, [id, checked, a]);
   return (
     <div className={`flex-shrink-0 ${row ? 'w-fit' : 'w-full'}`}>
-      <h1 className='text-2xl pl-2'>{title}</h1>
+      {/* <h1 className='text-2xl pl-2'>{title}</h1> */}
       <Link href={`/${city ? city : ecity}/${cat}/${id}`}>
         <div className='relative sm:w-fit w-full from-red-100 to-blue-500 sm:hover:bg-gradient-to-br rounded p-2' style={{ background: background ? 'transparent' : '' }}>
-          <Absolute>
-            <motion.div
-              className='flex items-center justify-center h-full'
-              variants={variants}
-              transition={{ duration: 0.5, repeat: 1, repeatType: 'mirror' }}
-              initial={{ opacity: 0 }}
-              animate={`${checked ? 'active' : 'inactive'}`}>
-              <BookmarkIcon></BookmarkIcon>
-            </motion.div>
-          </Absolute>
-          <Img priority={priority} src={img ? img : 'Poster.jpg'} w={480} h={480} className='sm:w-72 w-full h-72 rounded object-cover'></Img>
-          {must && <Must />}
-          {saveIcon ? (
-            <div className='absolute bottom-0 mb-6 flex gap-x-4 justify-center w-full fill-white '>
-              <Save city={city ? city : ecity} id={id} cat={cat} setChecked={setChecked} checked={checked} />
+          <div className='bg-transparent relative rounded overflow-hidden  '>
+            <div className='border rounded border-gray-500 absolute top-0 flex items-center justify-center w-full h-full bg-gradient-to-b from-gray-700/90 via-transparent to-transparent z-0'></div>
+            <div className='absolute top-6 left-0 mb-6 flex text-center items-center justify-center w-full z-10'>
+              <h1 className='text-2xl px-2'>{title}</h1>
             </div>
-          ) : (
-            <div className='flex gap-x-2 mt-2 justify-stretch z-10 relative'>
-              <button onClick={handleDelete} className='p-2 border w-full hover:border hover:border-blue-300'>
-                Borrar
-              </button>
-            </div>
-          )}
+            <Absolute>
+              <motion.div
+                className='flex items-center justify-center h-full'
+                variants={variants}
+                transition={{ duration: 0.5, repeat: 1, repeatType: 'mirror' }}
+                initial={{ opacity: 0 }}
+                animate={`${checked ? 'active' : 'inactive'}`}>
+                <BookmarkIcon></BookmarkIcon>
+              </motion.div>
+            </Absolute>
+            <Img priority={priority} src={img ? img : 'Poster.jpg'} w={480} h={480} className='sm:w-72 w-full h-72 rounded border border-gray-500  object-cover'></Img>
+
+            {/*     {must && <Must />} */}
+            {saveIcon ? (
+              <div className='absolute bottom-0 mb-6 flex gap-x-4 justify-center w-full fill-white '>
+                <Save city={city ? city : ecity} id={id} cat={cat} setChecked={setChecked} checked={checked} />
+              </div>
+            ) : (
+              <div className='flex gap-x-2 mt-2 justify-stretch z-10 relative '>
+                <button onClick={handleDelete} className='rounded p-2 border w-full hover:border hover:border-blue-300'>
+                  <ClearIcon />
+                  Borrar
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </Link>
     </div>

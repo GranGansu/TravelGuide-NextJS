@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }) {
             <Absolute className='from-orange-400 to-orange-400 bg-gradient-to-b  z-10 sm:opacity-100 opacity-90 border-b border-orange-300 w-[100vw]'></Absolute>
             <Header city={city}></Header>
           </div>
-          <div className='text-white py-2 bg-gray-700/90 border-b border-gray-400 text-center'>
+          <div className='text-white bg-gray-700/90 border-b border-gray-400 text-center'>
             <Announcement></Announcement>
           </div>
           <Page city={city}>
