@@ -61,9 +61,9 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
     <div className={`flex-shrink-0 ${row ? 'w-fit' : 'w-full'}`}>
       {/* <h1 className='text-2xl pl-2'>{title}</h1> */}
       <Link href={`/${city ? city : ecity}/${cat}/${id}`}>
-        <div className='relative sm:w-fit w-full from-red-100 to-blue-500 sm:hover:bg-gradient-to-br rounded p-2' style={{ background: background ? 'transparent' : '' }}>
-          <div className='bg-transparent relative rounded overflow-hidden  '>
-            <div className='border rounded border-gray-500 absolute top-0 flex items-center justify-center w-full h-full bg-gradient-to-b from-gray-700/90 via-transparent to-transparent z-0'></div>
+        <div className='relative sm:w-fit w-full from-red-100 to-blue-500 sm:hover:bg-gradient-to-br rounded sm:p-2' style={{ background: background ? 'transparent' : '' }}>
+          <div className='bg-transparent relative rounded overflow-hidden  shadow-xl'>
+            <div className=' rounded border-gray-500 absolute top-0 flex items-center justify-center w-full h-full bg-gradient-to-b from-gray-700/90 via-transparent to-transparent z-0'></div>
             <div className='absolute top-6 left-0 mb-6 flex text-center items-center justify-center w-full z-10'>
               <h1 className='text-2xl px-2'>{title}</h1>
             </div>
@@ -86,7 +86,7 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
               </div>
             ) : (
               <div className='flex gap-x-2 mt-2 justify-stretch z-10 relative '>
-                <button onClick={handleDelete} className='rounded p-2 border w-full hover:border hover:border-blue-300'>
+                <button onClick={handleDelete} className='rounded p-2 border w-full hover:border hover:bg-red-100 hover:text-black'>
                   <ClearIcon />
                   Borrar
                 </button>

@@ -19,7 +19,7 @@ export default function Announcement() {
     }
   }, [estado]);
   return (
-    <div className='text-lg mx-auto items-center justify-center grid grid-cols-3'>
+    <div className='text-lg mx-auto items-center justify-center grid grid-cols-3 max-w-4xl'>
       {modal}
       {lang}
       <Link href='/' className='py-3 relative h-full flex items-center text-gray-300 overflow-hidden'>
@@ -38,7 +38,7 @@ export default function Announcement() {
         onClick={() => {
           setLang(true);
         }}
-        className='text-gray-300'>
+        className='text-gray-300 hover:cursor-pointer'>
         <TranslateIcon />
       </div>
     </div>

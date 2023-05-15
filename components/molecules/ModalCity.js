@@ -55,8 +55,8 @@ export default function ModalCity({ setEstado, number = true }) {
                 setVis(city.id);
                 setCity(city.name.toLowerCase());
               }}>
-              {' '}
-              <Link href={`/${city.name.toLowerCase()}/do`}>
+              {/* {'${city.name.toLowerCase()}/do '} */}
+              <Link href={`/`}>
                 <li className='hover:scale-110 hover:cursor-pointer text-3xl'>{city.name}</li>
               </Link>
             </motion.div>

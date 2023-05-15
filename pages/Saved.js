@@ -42,11 +42,11 @@ export default function Saved() {
   }, [refresh]);
   return (
     <div className='bg-gray-700/90 flex-grow flex flex-col justify-center items-center'>
-      <div className='flex gap-x-2 items-center mt-8'>
-        <h1 className=' w-full text-center text-white select-none'>
+      <div className='flex gap-x-2 items-center mt-8 select-none'>
+        <h1 className=' w-full text-center text-white '>
           <span className='bg-gray-700/90 rounded p-2 px-4 text-lg border border-gray-500'>Guardados</span>
         </h1>
-        <div
+        <button
           className='p-2 flex w-fit bg-gray-800 hover:bg-red-400 rounded border border-gray-500 hover:cursor-pointer'
           onClick={() => {
             localStorage.doPREV = localStorage.doNUEVO;
@@ -58,8 +58,8 @@ export default function Saved() {
           }}>
           <DeleteForeverIcon />
           <p>All</p>
-        </div>
-        <div
+        </button>
+        <button
           className='p-2 flex w-fit bg-gray-800 hover:bg-blue-400 rounded border border-gray-500 hover:cursor-pointer'
           onClick={() => {
             localStorage.doNUEVO = localStorage.doPREV;
@@ -69,9 +69,9 @@ export default function Saved() {
           }}>
           <HistoryIcon />
           <p>Recuperar</p>
-        </div>
+        </button>
       </div>
-      {rawData.join('').length !== 0 ? listaGuardados : <div className='p-6 h-full'>Nada guardado de momento</div>}
+      {rawData.join('').length !== 0 ? listaGuardados : <div className='p-6 h-full select-none'>Nada guardado de momento</div>}
     </div>
   );
 }

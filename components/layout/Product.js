@@ -55,7 +55,6 @@ export default function Product({ data, city }) {
                 <div className='grid sm:grid-cols-2 gap-4'>
                   {Object.keys(opiniones)
                     .sort((a, b) => {
-                      console.log(opiniones[a]);
                       return opiniones[b] - opiniones[a];
                     })
                     .map((opinion, key) => {
@@ -68,7 +67,9 @@ export default function Product({ data, city }) {
                             <p className='capitalize'>{opinion}</p>
                             <p className='text-xl'>{number}%</p>
                           </div>
-                          <div className='absolute h-full left-0 top-0 z-0 rounded-r-md' style={{ width: number + '%', background: 'red', opacity: number + '%' }}></div>
+                          <div
+                            className='absolute h-full left-0 top-0 z-0 rounded-r-md'
+                            style={{ width: number + '%', background: 'linear-gradient(45deg, #e2ff70, white)', opacity: number + '%' }}></div>
                         </div>
                       );
                     })}

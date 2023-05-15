@@ -4,9 +4,9 @@ export default function Benefits() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 600], ['100%', '200%']);
   const beneficios = [
-    { h1: '24', p: 'Horas abierto' },
-    { h1: '77', p: 'Clases al día' },
-    { h1: '33', p: 'Cintas de correr' },
+    { h1: '12', p: 'Países' },
+    { h1: '1050', p: 'Planes' },
+    { h1: '77', p: 'Ciudades' },
   ];
   return (
     <div className='z-50 min-h-min text-center px-6 sm:px-0 py-[40px] sm:flex sm:flex-row grid grid-cols-2 gap-4 relative justify-center bg-orange-400 overflow-x-hidden overflow-hidden'>
