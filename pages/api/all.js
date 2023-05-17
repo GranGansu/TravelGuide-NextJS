@@ -4,6 +4,21 @@ export const paths = [
   { id: 2, name: 'Canarias', url: '/canarias' },
   { id: 3, name: 'Madrid', url: '/madrid' },
 ];
+export const filtrosver = [
+  { id: 1, name: 'Museos' },
+  { id: 2, name: 'Iglesias' },
+  { id: 3, name: 'Catedrales' },
+  { id: 4, name: 'Monumentos' },
+  { id: 5, name: 'Parques' },
+];
+export const filtroshacer = [
+  { id: 1, name: 'Parques Diversión' },
+  { id: 2, name: 'Cine' },
+  { id: 3, name: 'Música' },
+  { id: 4, name: 'Teatro' },
+  { id: 5, name: 'Playa' },
+  { id: 6, name: 'Naturaleza' },
+];
 export default function handler(req, res) {
   const see = req.query.see;
   const doo = req.query.doo;

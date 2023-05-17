@@ -2,16 +2,9 @@ import { useState } from 'react';
 import { Filters } from 'components/organisms';
 import Head from 'next/head';
 import Cardz from 'components/layout/Cardz';
-import { hacerr, paths } from 'pages/api/all';
+import { hacerr, paths, filtroshacer as filtros } from 'pages/api/all';
 
 export default function Do({ rawData, category }) {
-  const filtros = [
-    { id: 1, name: 'Parques Diversión' },
-    { id: 2, name: 'Cine' },
-    { id: 3, name: 'Música' },
-    { id: 4, name: 'Teatro' },
-    { id: 5, name: 'Playa' },
-  ];
   const [filter, setFilter] = useState(filtros);
   return (
     <div className='bg-slate-700 flex-grow'>

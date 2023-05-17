@@ -23,3 +23,9 @@ export const theme = dark;
 //Banner
 export const title1 = 'Guarda tus planes favoritos';
 export const title2 = 'Abierto 24hs';
+//Secciones
+export const secciones = [
+  { title: '¿Qué encuentro más barato?', url: 'barato' },
+  { title: 'Plan para ya', url: 'ya' },
+  { title: '¿Qué costumbre es ésa?', url: 'costumbre' },
+];

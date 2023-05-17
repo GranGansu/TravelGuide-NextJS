@@ -41,7 +41,7 @@ export default function Saved() {
     });
   }, [refresh]);
   return (
-    <div className='bg-gray-700/90 flex-grow flex flex-col justify-center items-center'>
+    <div className='bg-gray-700/90 flex-grow flex flex-col  items-center'>
       <div className='flex gap-x-2 items-center mt-8 select-none'>
         <h1 className=' w-full text-center text-white '>
           <span className='bg-gray-700/90 rounded p-2 px-4 text-lg border border-gray-500'>Guardados</span>
@@ -49,23 +49,28 @@ export default function Saved() {
         <button
           className='p-2 flex w-fit bg-gray-800 hover:bg-red-400 rounded border border-gray-500 hover:cursor-pointer'
           onClick={() => {
-            localStorage.doPREV = localStorage.doNUEVO;
-            localStorage.seePREV = localStorage.seeNUEVO;
-            localStorage.doNUEVO = JSON.stringify({});
-            localStorage.seeNUEVO = JSON.stringify({});
-            setRefresh((prev) => !prev);
-            setSaved((prev) => !prev);
+            if (saved !== 0) {
+              localStorage.doPREV = localStorage.doNUEVO;
+              localStorage.seePREV = localStorage.seeNUEVO;
+              localStorage.doNUEVO = JSON.stringify({});
+              localStorage.seeNUEVO = JSON.stringify({});
+              setRefresh((prev) => !prev);
+              setSaved((prev) => !prev);
+            }
           }}>
           <DeleteForeverIcon />
           <p>All</p>
         </button>
         <button
-          className='p-2 flex w-fit bg-gray-800 hover:bg-blue-400 rounded border border-gray-500 hover:cursor-pointer'
+          disabled={localStorage.doPREV === undefined && true}
+          className='p-2 disabled:bg-gray-400 disabled:text-gray-200 flex w-fit bg-gray-800 disabled:cursor-not-allowed hover:bg-blue-400 rounded border border-gray-500 hover:cursor-pointer'
           onClick={() => {
-            localStorage.doNUEVO = localStorage.doPREV;
-            localStorage.seeNUEVO = localStorage.seePREV;
-            setRefresh((prev) => !prev);
-            setSaved((prev) => !prev);
+            if (localStorage.doPREV || localStorage.seePREV) {
+              localStorage.doNUEVO = localStorage.doPREV;
+              localStorage.seeNUEVO = localStorage.seePREV;
+              setRefresh((prev) => !prev);
+              setSaved((prev) => !prev);
+            }
           }}>
           <HistoryIcon />
           <p>Recuperar</p>

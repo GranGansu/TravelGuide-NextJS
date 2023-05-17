@@ -1,6 +1,7 @@
 /* import { useRouter } from 'next/router';
 import { useState } from 'react'; */
 import Product from 'components/layout/Product';
+
 import { hacerr } from 'pages/api/all';
 
 export default function Doo({ post, ci }) {

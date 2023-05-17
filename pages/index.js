@@ -3,7 +3,6 @@ import { head } from '../configs/globals';
 import { Banner, FixedBg, Benefits } from '../components/organisms';
 import { Cards } from '../components/layout/';
 import { forwardRef } from 'react';
-import { hacer, ver, hacerr, verr } from './api/all';
 import useGetCity from 'components/hooks/useGetCity';
 
 const Home = forwardRef(function Home(props, ref) {
@@ -28,13 +27,26 @@ const Home = forwardRef(function Home(props, ref) {
     </>
   );
 });
+/*   const todos = Object.values(verr).flat().concat(Object.values(hacerr).flat()); */
 
 export default Home;
 export async function getStaticProps() {
-  const todos = Object.values(verr).flat().concat(Object.values(hacerr).flat());
+  const sqlite3 = require('sqlite3').verbose();
+  let db = new sqlite3.Database('data.db');
+  const nu = () => {
+    return new Promise((resolve, reject) => {
+      const todos = [];
+      db.all('SELECT * FROM barcelonaver', [], (err, rows) => {
+        todos.push(...rows);
+        return resolve(todos);
+      });
+    });
+  };
+  const ney = await nu();
+  db.close();
   return {
     props: {
-      rawData: todos,
+      rawData: ney,
     },
   };
 }

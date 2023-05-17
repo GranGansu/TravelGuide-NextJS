@@ -2,16 +2,9 @@ import { useState } from 'react';
 import { Filters } from 'components/organisms';
 import Head from 'next/head';
 import Cardz from 'components/layout/Cardz';
-import { verr, paths } from 'pages/api/all';
+import { verr, paths, filtrosver as filtros } from 'pages/api/all';
 
 export default function See({ rawData, category }) {
-  const filtros = [
-    { id: 1, name: 'Museos' },
-    { id: 2, name: 'Iglesias' },
-    { id: 3, name: 'Catedrales' },
-    { id: 4, name: 'Monumentos' },
-    { id: 5, name: 'Parques' },
-  ];
   const [filter, setFilter] = useState(filtros);
   return (
     <div className='bg-slate-700 flex-grow'>
@@ -39,9 +32,24 @@ export async function getStaticPaths() {
 }
 export async function getStaticProps({ params }) {
   const ciudad = params.city;
+
+  const sqlite3 = require('sqlite3').verbose();
+  let db = new sqlite3.Database('data.db');
+  const nu = () => {
+    return new Promise((resolve, reject) => {
+      const todos = [];
+      db.all(`SELECT * FROM ${ciudad}ver`, [], (err, rows) => {
+        todos.push(...rows);
+        return resolve(todos);
+      });
+    });
+  };
+  const ney = await nu();
+  db.close();
+
   return {
     props: {
-      rawData: verr[ciudad],
+      rawData: ney,
       category: ciudad,
     },
   };

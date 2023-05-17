@@ -12,11 +12,15 @@ export default function Menu({ city }) {
     const Icon = i.icon;
     const active = '/[city]/' + i.url === current || current === '/' + i.title;
     return (
-      <motion.li key={key} className={` sm:border-0 h-full flex justify-center  ${active && 'bg-gray-600'}`}>
+      <motion.li
+        key={key}
+        className={`py-2 sm:p-0 sm:border-0 h-full flex justify-center  ${
+          active && 'bg-gray-600 sm:shadow-none shadow-md border-t border-gray-400 sm:translate-y-0 -translate-y-1 sm:rounded-none rounded'
+        }`}>
         <Link href={`/${i.url !== 'Saved' ? city + '/' : ''}${i.url}`} className='w-full h-full p-4 py-3 flex items-center justify-center'>
           <div className='flex gap-x-2 items-center'>
             {i.url !== 'Saved' && (
-              <p className={`font-bold text-center text-xl sm:text-2xl capitalize ${active ? ' text-red-100  underline-offset-4' : 'text-white '}`}>{i.title}</p>
+              <p className={`font-thin text-center text-xl sm:text-2xl capitalize ${active ? '   underline-offset-4 text-yellow-200' : 'text-white '}`}>{i.title}</p>
             )}
             {i.icon && showIcons && <Icon className='fill-white border border-slate-300 rounded-full p-2 box-content shadow-inner'></Icon>}
             {i.url === 'Saved' && (

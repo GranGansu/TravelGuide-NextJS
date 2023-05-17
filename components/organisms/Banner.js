@@ -1,17 +1,23 @@
 import { title1, title2 } from '../../configs/globals';
 import { Img, Absolute } from '../atoms';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import useGetCity from 'components/hooks/useGetCity';
 import Link from 'next/link';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 export default function Banner({ city }) {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], ['0%', '30%']);
+  const y = useTransform(scrollY, [0, 600], ['0%', '60%']);
+  const yb = useTransform(scrollY, [0, 500], ['-40%', '30%']);
+  const yc = useTransform(scrollY, [0, 200], ['100%', '0%']);
   return (
-    <div className='h-[50vh] flex items-center justify-center text-center px-4 sm:px-0 relative bg-red-400 overflow-hidden'>
+    <div className='h-[50vh] flex items-center justify-center text-center px-4 sm:px-0 relative  bg-gray-700/90 overflow-hidden'>
       <motion.div
-        className='opacity-60 absolute h-full w-full'
-        style={{ backgroundSize: 'initial', backgroundImage: `url(img/ciudad.jpg)`, backgroundPositionY: y, backgroundPositionX: 'center' }}>
+        className='opacity-100 absolute h-full w-full bg-no-repeat'
+        style={{ backgroundSize: 'cover', backgroundImage: `url(img/${city}.webp)`, backgroundPositionY: y, backgroundPositionX: 'center', opacity: yc }}>
+        <div className='w-full h-full from-transparent to-gray-600 bg-gradient-to-b'></div>
+        {/*         <Img className='w-full h-full object-cover' src={`ciudad.jpg`}></Img> */}
+      </motion.div>
+      <motion.div
+        className='opacity-0 absolute h-full w-full bg-no-repeat'
+        style={{ backgroundSize: 'initial', backgroundImage: `url(img/trees.webp)`, backgroundPositionY: yb, backgroundPositionX: 'center' }}>
         {/*         <Img className='w-full h-full object-cover' src={`ciudad.jpg`}></Img> */}
       </motion.div>
       {/*       <motion.div className='w-full h-full absolute' style={{ top: y }}>
@@ -32,7 +38,7 @@ export default function Banner({ city }) {
             {title1} en <span className=' p-2 rounded drop-shadow-lg text-orange-200 block  mt-2 text-5xl'>{city}</span>
           </h1>
         </div>
-        <div className='flex gap-2 sm:flex-row flex-col font-thin capitalize'>
+        <div className='flex gap-4 sm:flex-row flex-col font-thin capitalize'>
           <motion.button
             whileHover={{ scale: 0.95 }}
             whileTap={{ scale: 0.6 }}
