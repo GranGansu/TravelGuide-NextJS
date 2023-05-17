@@ -62,7 +62,6 @@ export default function Saved() {
           <p>All</p>
         </button>
         <button
-          disabled={localStorage.doPREV === undefined && true}
           className='p-2 disabled:bg-gray-400 disabled:text-gray-200 flex w-fit bg-gray-800 disabled:cursor-not-allowed hover:bg-blue-400 rounded border border-gray-500 hover:cursor-pointer'
           onClick={() => {
             if (localStorage.doPREV || localStorage.seePREV) {
@@ -80,3 +79,4 @@ export default function Saved() {
     </div>
   );
 }
+//         disabled={localStorage.doPREV === undefined && true}

@@ -1,5 +1,4 @@
-4.- Qué es más barato que en mi país? seccion especial
-5.- Corregir Saved, guardados en ciudad
+5.- Corregir Saved, localStorage restore. Based on city
 6.- Añadir idioma
 
 Comandos:
