@@ -4,6 +4,7 @@ import { Banner, FixedBg, Benefits } from '../components/organisms';
 import { Cards } from '../components/layout/';
 import { forwardRef } from 'react';
 import useGetCity from 'components/hooks/useGetCity';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Home = forwardRef(function Home(props, ref) {
   const [city, setCity] = useGetCity();
@@ -30,7 +31,7 @@ const Home = forwardRef(function Home(props, ref) {
 /*   const todos = Object.values(verr).flat().concat(Object.values(hacerr).flat()); */
 
 export default Home;
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
   const sqlite3 = require('sqlite3').verbose();
   let db = new sqlite3.Database('data.db');
   const nu = () => {
@@ -47,6 +48,7 @@ export async function getStaticProps() {
   return {
     props: {
       rawData: ney,
+      ...(await serverSideTranslations(locale, ['home', 'common'])),
     },
   };
 }

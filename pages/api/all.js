@@ -5,11 +5,12 @@ export const paths = [
   { id: 3, name: 'Madrid', url: '/madrid' },
 ];
 export const filtrosver = [
-  { id: 1, name: 'Museos' },
-  { id: 2, name: 'Iglesias' },
-  { id: 3, name: 'Catedrales' },
-  { id: 4, name: 'Monumentos' },
-  { id: 5, name: 'Parques' },
+  { id: 1, name: 'museums' },
+  { id: 2, name: 'churches' },
+  { id: 3, name: 'cathedrals' },
+  { id: 4, name: 'monuments' },
+  { id: 5, name: 'parks' },
+  { id: 6, name: 'views' },
 ];
 export const filtroshacer = [
   { id: 1, name: 'Parques Diversión' },

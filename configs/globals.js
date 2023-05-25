@@ -9,8 +9,8 @@ export const showIcons = false;
 export const announcement = { text: 'Barcelona', url: '' };
 export const headerMenu = [
   /*   { title: 'Home', img: 'choose', url: '/', icon: HomeRoundedIcon }, */
-  { title: 'Ver', img: 'prices', url: 'see', icon: ApartmentOutlinedIcon },
-  { title: 'hacer', img: 'questions', url: 'do', icon: DirectionsWalkOutlinedIcon },
+  { title: 'See', img: 'prices', url: 'see', icon: ApartmentOutlinedIcon },
+  { title: 'Do', img: 'questions', url: 'do', icon: DirectionsWalkOutlinedIcon },
   { title: 'Saved', img: 'questions', url: 'Saved', icon: DirectionsWalkOutlinedIcon },
 ];
 //Home

@@ -10,6 +10,8 @@ const SavedContext = createContext(null);
 const CityContext = createContext(null);
 import { useRouter } from 'next/router';
 import { paths } from './api/all';
+import { appWithTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -41,8 +43,8 @@ function MyApp({ Component, pageProps }) {
     <div className={`${poppins.className} overflow-y-auto min-h-screen flex flex-col justify-between overflow-x-hidden relative`}>
       <SavedContext.Provider value={[saved, setSaved]}>
         <CityContext.Provider value={[city, setCity]}>
-          <div className='bg-black  border-white fixed bottom-0 z-50 w-full sm:relative'>
-            <Absolute className='from-orange-400 to-orange-400 bg-gradient-to-b  z-10 sm:opacity-100 opacity-90 border-b border-orange-300 w-[100vw]'></Absolute>
+          <div className='bg-transparent  border-white fixed bottom-0 z-50 w-full sm:relative'>
+            <Absolute className='bg-transparent  z-10 sm:opacity-100 opacity-90 border-b border-orange-300 w-[100vw]'></Absolute>
             <Header city={city}></Header>
           </div>
           <div className='text-white bg-gray-700/90 border-b border-gray-400 text-center'>
@@ -57,5 +59,13 @@ function MyApp({ Component, pageProps }) {
     </div>
   );
 }
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['home', 'common'])),
+      // Will be passed to the page component as props
+    },
+  };
+}
 export { SavedContext, CityContext };
-export default MyApp;
+export default appWithTranslation(MyApp);

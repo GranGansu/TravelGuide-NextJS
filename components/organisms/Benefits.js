@@ -4,14 +4,17 @@ import MuseumIcon from '@mui/icons-material/Museum';
 import AttractionsIcon from '@mui/icons-material/Attractions';
 import RamenDiningIcon from '@mui/icons-material/RamenDining';
 import PublicIcon from '@mui/icons-material/Public';
+import { useTranslation } from 'next-i18next';
+
 export default function Benefits() {
+  const { t } = useTranslation('home');
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 600], ['100%', '200%']);
   const beneficios = [
-    { h1: '12', p: 'Museos', icon: <MuseumIcon /> },
-    { h1: '1050', p: 'Atracciones', icon: <AttractionsIcon /> },
-    { h1: '77', p: 'Comida Local', icon: <RamenDiningIcon /> },
-    { h1: '77', p: 'Lang Exchange', icon: <PublicIcon /> },
+    { h1: '12', p: 'museums', icon: <MuseumIcon /> },
+    { h1: '1050', p: 'amusement', icon: <AttractionsIcon /> },
+    { h1: '77', p: 'local', icon: <RamenDiningIcon /> },
+    { h1: '77', p: 'lang', icon: <PublicIcon /> },
   ];
   return (
     <div className='z-50 min-h-min text-center px-6 sm:px-0 py-[40px] sm:flex sm:flex-row grid grid-cols-2 gap-4 relative justify-center bg-orange-400 overflow-x-hidden overflow-hidden'>
@@ -25,7 +28,7 @@ export default function Benefits() {
             <motion.h1 className='text-3xl font-bold text-gray-50' style={{ fontSize: y }}>
               {b.icon}
             </motion.h1>
-            <p>{b.p}</p>
+            <p>{t(b.p)}</p>
           </div>
         );
       })}

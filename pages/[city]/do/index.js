@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { Filters } from 'components/organisms';
 import Head from 'next/head';
 import Cardz from 'components/layout/Cardz';
-import { hacerr, paths, filtroshacer as filtros } from 'pages/api/all';
-
+import { paths, filtroshacer as filtros } from 'pages/api/all';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 export default function Do({ rawData, category }) {
   const [filter, setFilter] = useState(filtros);
+  const { t } = useTranslation('main');
+
   return (
     <div className='bg-slate-700 flex-grow'>
       <Head>
@@ -14,7 +17,7 @@ export default function Do({ rawData, category }) {
       </Head>
       <div className='pt-8 pb-2 flex flex-col sm:items-center'>
         <p className='pl-7 mb-2'>
-          Mostrando <span className='text-gray-500'>click para desmarcar</span>
+          {t('showing')} <span className='text-gray-500'>{t('click')}</span>
         </p>
         <Filters full={filtros} filters={filter} set={setFilter}></Filters>
       </div>
@@ -30,12 +33,28 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
   const ciudad = params.city;
+
+  const sqlite3 = require('sqlite3').verbose();
+  let db = new sqlite3.Database('data.db');
+  const nu = () => {
+    return new Promise((resolve, reject) => {
+      const todos = [];
+      db.all(`SELECT * FROM hacer WHERE city='${ciudad}'`, [], (err, rows) => {
+        todos.push(...rows);
+        return resolve(todos);
+      });
+    });
+  };
+  const ney = await nu();
+  db.close();
+
   return {
     props: {
-      rawData: hacerr[ciudad],
+      rawData: ney,
       category: ciudad,
+      ...(await serverSideTranslations(locale, ['main', 'common'])),
     },
   };
 }

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Img } from '../../components/atoms';
 import Save from '../molecules/C/Save';
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
+import VerifiedIcon from '@mui/icons-material/Verified';
 import ImageGallery from 'react-image-gallery';
 import { useModal } from 'components/hooks';
 import Head from 'next/head';
@@ -54,16 +55,18 @@ export default function Product({ data, city }) {
             </div>
 
             <div className='flex flex-col gap-y-4 text-justify mx-4 -mt-6 z-10'>
-              <p className='p-4 px-6  border bg-gray-100 text-black flex items-center rounded text-md leading-7'>{data.description}</p>
-              {frame({ icon: <WarningAmberIcon className='text-gray-300' />, warning: true, title: 'Debes saber', razon: ['Buen ambiente', 'Mucho sol'] })}
+              <p className='p-4 px-6  border bg-gray-100 text-black flex items-center rounded text-md leading-7 gap-x-1'>
+                <VerifiedIcon className='text-gray-700' /> {data.razon[0].toUpperCase() + data.razon.substring(1)}
+              </p>
+              {frame({ icon: <WarningAmberIcon className='text-gray-300' />, warning: true, title: 'Debes saber', razon: ['Peligroso'] })}
               {frame({
-                title: 'Por qué visitarla',
+                title: `Por qué visitar ${data.name}`,
                 razon: ['Buen ambiente', 'Mucho sol'],
                 description:
                   'Es una de las plazas más apreciadas del barrio de Gracia, para salir a tomar una copa y tapear por la noche. Siempre hay mucha animación en la plaza, a veces hay un grupo de jóvenes que tocan música, o bien malabaristas, gente que viene a hacer skate board o a patinar…',
               })}
               <div className=' p-6 rounded-lg mt-6 border bg-gray-50'>
-                <p className='text-lg mb-4'>Elige una razón para visitar {data.name}</p>
+                <p className='text-lg mb-4'>¿En qué destaca {data.name}?</p>
                 <div className='grid sm:grid-cols-2 gap-4'>
                   {Object.keys(opiniones)
                     .sort((a, b) => {

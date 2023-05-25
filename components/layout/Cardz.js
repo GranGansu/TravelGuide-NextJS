@@ -1,10 +1,8 @@
-import useGetCity from 'components/hooks/useGetCity';
 import { useEffect, useState } from 'react';
 import { Card, Loading } from '../molecules';
 import { hacer, ver } from 'pages/api/all';
 export default function Cardz({ row, filters, rawData, saveIcon = true, setRefresh, category }) {
   const [dataFiltrada, setDataFiltrada] = useState(null);
-  const [city, setCity] = useGetCity();
   useEffect(() => {
     if (filters !== undefined) {
       setDataFiltrada(

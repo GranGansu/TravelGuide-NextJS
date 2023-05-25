@@ -7,23 +7,29 @@ import { useState, useMemo } from 'react';
 import useCountSaved from '../../hooks/useCountSaved';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useTranslation } from 'react-i18next';
+
 export default function C({ id, title, img, cat, must, saveIcon, setRefresh, priority, city, row, ecity }) {
   const [a, setSaved] = useCountSaved();
   const [checked, setChecked] = useState(false);
   const [background, setBackground] = useState(false);
+  const { t } = useTranslation('common');
   const handleDelete = (e) => {
     const nu = cat + 'NUEVO';
     e.preventDefault();
     const localObject = JSON.parse(localStorage[nu]);
-    localObject[city] = localObject[city].filter((p) => {
+    localObject[ecity] = localObject[ecity].filter((p) => {
       return p !== id;
     });
+    if (localObject[ecity].length === 0) {
+      delete localObject[ecity];
+    }
     localStorage[nu] = JSON.stringify({ ...localObject });
     setSaved((prev) => !prev);
     setRefresh((prev) => !prev);
   };
   const variants = { active: { opacity: 1, scale: 5.5 }, inactive: { opacity: 0, scale: 0 } };
-  const carta = useMemo(() => {
+  /*   const carta = useMemo(() => {
     return (
       <div className={`flex-shrink-0 ${row ? 'w-fit' : 'w-full'}`}>
         <h1 className='text-2xl pl-2'>{title}</h1>
@@ -56,20 +62,20 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
         </Link>
       </div>
     );
-  }, [id, checked, a]);
+  }, [id, checked, a]); */
   return (
     <div className={`flex-shrink-0 ${row ? 'w-fit' : 'w-full'}`}>
       {/* <h1 className='text-2xl pl-2'>{title}</h1> */}
       <Link href={`/${city ? city : ecity}/${cat}/${id}`}>
         <div className='relative sm:w-fit w-full from-red-100 to-blue-500 sm:hover:bg-gradient-to-br rounded sm:p-2' style={{ background: background ? 'transparent' : '' }}>
-          <div className='bg-transparent relative rounded overflow-hidden  shadow-xl'>
-            <div className=' rounded border-gray-500 absolute top-0 flex items-center justify-center w-full h-full bg-gradient-to-b from-gray-700/90 via-transparent to-transparent z-0'></div>
+          <div className='bg-transparent relative rounded overflow-hidden '>
+            <div className=' rounded border-gray-400 border absolute top-0 flex items-center justify-center w-full h-full bg-gradient-to-b from-gray-700/90 via-transparent to-transparent z-0'></div>
             <div className='absolute top-6 left-0 mb-6 flex text-center items-center justify-center w-full z-10'>
               <h1 className='text-2xl px-2'>{title}</h1>
             </div>
             <Absolute>
               <motion.div
-                className='flex items-center justify-center h-full'
+                className='flex items-center justify-center h-full border-yellow-300'
                 variants={variants}
                 transition={{ duration: 0.5, repeat: 1, repeatType: 'mirror' }}
                 initial={{ opacity: 0 }}
@@ -85,10 +91,10 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
                 <Save city={city ? city : ecity} id={id} cat={cat} setChecked={setChecked} checked={checked} />
               </div>
             ) : (
-              <div className='flex gap-x-2 mt-2 justify-stretch z-10 relative '>
-                <button onClick={handleDelete} className='rounded p-2 border w-full hover:border hover:bg-red-100 hover:text-black'>
+              <div className='flex gap-x-2 justify-stretch z-10 relative '>
+                <button onClick={handleDelete} className='rounded-b p-2 py-4 bg-gray-700 border-gray-400 border border-t-0 w-full  hover:bg-gray-600 hover:text-black'>
                   <ClearIcon />
-                  Borrar
+                  {t('delete')}
                 </button>
               </div>
             )}

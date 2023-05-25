@@ -2,7 +2,11 @@ import { title1, title2 } from '../../configs/globals';
 import { Img, Absolute } from '../atoms';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';
+import { useTranslation } from 'next-i18next';
+
 export default function Banner({ city }) {
+  const { t } = useTranslation('home');
+
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 600], ['0%', '60%']);
   const yb = useTransform(scrollY, [0, 500], ['-40%', '30%']);
@@ -35,7 +39,7 @@ export default function Banner({ city }) {
       <div className='z-0 relative items-center flex space-y-6 flex-col font-bold uppercase'>
         <div className='flex items-start flex-col'>
           <h1 className='text-4xl sm:text-4xl'>
-            {title1} en <span className=' p-2 rounded drop-shadow-lg text-orange-200 block  mt-2 text-5xl'>{city}</span>
+            {t('title')} <span className=' p-2 rounded drop-shadow-lg text-orange-200 block  mt-2 text-5xl'>{city}</span>
           </h1>
         </div>
         <div className='flex gap-4 sm:flex-row flex-col font-thin capitalize'>
@@ -44,7 +48,8 @@ export default function Banner({ city }) {
             whileTap={{ scale: 0.6 }}
             className='px-6 shadow backdrop-blur-md py-2 text-2xl text-white rounded-full bg-transparent border w-fit'>
             <Link href={`/${city}/see`} className='text-2xl'>
-              Qué ver en <span className='capitalize text-2xl'>{city}</span>
+              {t('seem')}
+              <span className='capitalize text-2xl'>{city}</span>
             </Link>
           </motion.button>
           <motion.button
@@ -52,7 +57,8 @@ export default function Banner({ city }) {
             whileTap={{ scale: 0.6 }}
             className='px-6 shadow backdrop-blur-md py-2 text-2xl text-white rounded-full bg-transparent border w-fit'>
             <Link href={`/${city}/do`} className='text-2xl'>
-              Qué hacer en <span className='capitalize text-2xl'>{city}</span>
+              {t('dom')}
+              <span className='capitalize text-2xl'>{city}</span>
             </Link>
           </motion.button>
         </div>

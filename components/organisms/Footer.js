@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { secciones } from '../../configs/globals';
 import { Absolute } from '../atoms';
+import { useTranslation } from 'next-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation('common');
   const redes = [{ name: 'Instagram', follow: 265 }, { name: 'Twitter', follow: 1500 }, { name: 'E-mail' }];
   return (
     <footer className='w-full  bg-gray-900 pb-10 flex flex-col items-center  gap-x-10 relative'>
@@ -13,18 +15,18 @@ export default function Footer() {
         </svg> */}
       </Absolute>
       <div className='flex flex-col py-12  text-white w-full sm:w-fit px-4 mx-auto relative z-10'>
-        <h2 className='text-xl text-white p-4 mb-4 border-blue-300 border flex gap-x-2'>
+        <h2 className='text-xl text-white p-4 mb-4 from-blue-500 to-transparent bg-gradient-to-r rounded border-none flex gap-x-2'>
           <svg className='fill-white' width='24' height='24' xmlns='http://www.w3.org/2000/svg' fillRule='evenodd' clipRule='evenodd'>
             <path d='M13 9h9l-14 15 3-9h-9l14-15-3 9zm-8.699 5h8.086l-1.987 5.963 9.299-9.963h-8.086l1.987-5.963-9.299 9.963z' />
           </svg>{' '}
-          Secciones
+          {t('sections')}
         </h2>
         <div className='flex sm:flex-row flex-col gap-4 overflow-x-auto overflow-y-visible'>
           {secciones.map((t, key) => {
             return (
-              <div key={key} className='p-4 border rounded hover:bg-gray-600 hover:cursor-pointer'>
-                <Link href={'/' + t.url}>{t.title}</Link>
-              </div>
+              <Link key={key} href={'/' + t.url}>
+                <div className='p-4 border rounded hover:bg-gray-600 hover:cursor-pointer'>{t.title}</div>
+              </Link>
             );
           })}
         </div>

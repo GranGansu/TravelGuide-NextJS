@@ -1,8 +1,4 @@
-/* import { useRouter } from 'next/router';
-import { useState } from 'react'; */
 import Product from 'components/layout/Product';
-
-import { hacerr } from 'pages/api/all';
 
 export default function Doo({ post, ci }) {
   /*   const router = useRouter();
@@ -16,19 +12,36 @@ export default function Doo({ post, ci }) {
   return <Product data={post} city={ci} />;
 }
 export async function getStaticPaths() {
-  const nuArray = [];
-  Object.keys(hacerr).map((city) => {
-    hacerr[city].map((object) => {
-      nuArray.push({ params: { id: object.id.toString(), city: city } });
+  const sqlite3 = require('sqlite3').verbose();
+  let db = new sqlite3.Database('data.db');
+  const nu = () => {
+    return new Promise((resolve, reject) => {
+      db.all(`SELECT id, city FROM hacer`, [], (err, rows) => {
+        return resolve(
+          rows.map((r) => {
+            return { params: { id: r.id.toString(), city: r.city } };
+          })
+        );
+      });
     });
-  });
-  return { paths: [...nuArray], fallback: false };
+  };
+  const ney = await nu();
+  db.close();
+  return { paths: ney, fallback: false };
 }
 export async function getStaticProps({ params }) {
-  const search = hacerr[params.city].filter((h) => {
-    return h.id.toString() === params.id.toString();
-  });
-  const post = { ...search }[0];
+  const ciudad = params.city.toString();
+  const sqlite3 = require('sqlite3').verbose();
+  let db = new sqlite3.Database('data.db');
+  const nu = () => {
+    return new Promise((resolve, reject) => {
+      db.get(`SELECT * FROM hacer WHERE id=${params.id} AND city='${ciudad}'`, [], (err, row) => {
+        return resolve(row);
+      });
+    });
+  };
+  const ney = await nu();
+  db.close();
   const ci = params.city;
-  return { props: { post, ci } };
+  return { props: { post: ney, ci } };
 }

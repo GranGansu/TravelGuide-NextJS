@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import useCountSaved from '../../hooks/useCountSaved';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { useTranslation } from 'next-i18next';
+
 export default function Save({ id, cat, contrast = false, setChecked = () => {}, checked, city }) {
   const [a, setSaved] = useCountSaved();
+  const { t } = useTranslation('common');
   const [visible, setVisible] = useState(checked);
   const nu = cat + 'NUEVO';
   const guardadoConCiudad = () => {
@@ -21,12 +24,12 @@ export default function Save({ id, cat, contrast = false, setChecked = () => {},
     return visible ? (
       <>
         <BookmarkIcon className={`fill-yellow-300  ${contrast && 'scale-125'}`} />
-        <p>Guardado</p>
+        <p>{t('saved')}</p>
       </>
     ) : (
       <>
         <BookmarkBorderIcon />
-        <p>Guardar</p>
+        <p>{t('save')}</p>
       </>
     );
   };
@@ -49,7 +52,7 @@ export default function Save({ id, cat, contrast = false, setChecked = () => {},
         if (!visible) {
           setVisible(true);
           setChecked(true);
-          setSaved((prev) => !prev);
+          setSaved((prev) => !prev); //Por esto se recarga toda la página
         }
       }}>
       <Save></Save>

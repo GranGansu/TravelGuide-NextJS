@@ -3,11 +3,15 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { paths } from 'pages/api/all';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+
 const idiomas = [
-  { id: 1, name: 'Spanish', url: '/' },
-  { id: 2, name: 'English', url: '/' },
+  { id: 1, name: 'Spanish', url: '/', locale: 'es' },
+  { id: 2, name: 'English', url: '/', locale: 'en' },
 ];
 export default function ModalCity({ setEstado, number = true }) {
+  const router = useRouter();
+
   const [city, setCity] = useGetCity();
   const [visible, setVis] = useState(0);
   const lang = (
@@ -26,6 +30,8 @@ export default function ModalCity({ setEstado, number = true }) {
               }}
               onClick={(e) => {
                 e.stopPropagation();
+                const { pathname, asPath, query } = router;
+                router.push({ pathname, query }, asPath, { locale: idioma.locale });
                 setVis(idioma.id);
               }}>
               {' '}

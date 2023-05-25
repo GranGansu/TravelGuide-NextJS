@@ -3,11 +3,13 @@ import useGetCity from 'components/hooks/useGetCity';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { announcement } from '../../configs/globals';
-import { useModal } from '../hooks';
 import { ModalCity } from './';
 import TranslateIcon from '@mui/icons-material/Translate';
+import { useTranslation } from 'next-i18next';
+import { useModal } from 'components/hooks';
+
 export default function Announcement() {
+  const { t } = useTranslation('common');
   const [estado, setEstado] = useState(false);
   const [modal, setVis] = useModal(false, <ModalCity setEstado={setEstado}></ModalCity>);
   const [lang, setLang] = useModal(false, <ModalCity setEstado={setEstado} number={false}></ModalCity>);
@@ -16,6 +18,7 @@ export default function Announcement() {
     if (estado) {
       setVis(false);
       setEstado(false);
+      setLang(false);
     }
   }, [estado]);
   return (
@@ -24,7 +27,7 @@ export default function Announcement() {
       {lang}
       <Link href='/' className='py-3 relative h-full flex items-center text-gray-300 overflow-hidden'>
         <ArrowDropDownIcon className='text-2xl rotate-90 absolute text-black z-0 left-4' />
-        <span className='ml-9'>Home</span>
+        <span className='ml-9'>{t('home')}</span>
       </Link>
       <motion.p
         className='max-w-fit -ml-3 text-white self-center place-self-center capitalize hover:cursor-pointer font-bold border-gray-400 pr-2 py-1 rounded'
