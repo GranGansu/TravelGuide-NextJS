@@ -7,8 +7,11 @@ import { ModalCity } from './';
 import TranslateIcon from '@mui/icons-material/Translate';
 import { useTranslation } from 'next-i18next';
 import { useModal } from 'components/hooks';
+import { useRouter } from 'next/router';
+import { Img } from 'components/atoms';
 
 export default function Announcement() {
+  const router = useRouter();
   const { t } = useTranslation('common');
   const [estado, setEstado] = useState(false);
   const [modal, setVis] = useModal(false, <ModalCity setEstado={setEstado}></ModalCity>);
@@ -22,27 +25,28 @@ export default function Announcement() {
     }
   }, [estado]);
   return (
-    <div className='text-lg mx-auto items-center justify-center grid grid-cols-3 max-w-4xl'>
+    <div className='text-md mx-auto items-center justify-center grid grid-cols-2 sm:grid-cols-3 max-w-4xl'>
       {modal}
       {lang}
-      <Link href='/' className='py-3 relative h-full flex items-center text-gray-300 overflow-hidden'>
+      <Link href='/' className='py-3 relative h-full items-center text-gray-300 overflow-hidden hidden sm:flex'>
         <ArrowDropDownIcon className='text-2xl rotate-90 absolute text-black z-0 left-4' />
         <span className='ml-9'>{t('home')}</span>
       </Link>
-      <motion.p
-        className='max-w-fit -ml-3 text-white self-center place-self-center capitalize hover:cursor-pointer font-bold border-gray-400 pr-2 py-1 rounded'
+      <motion.button
+        className='max-w-fit sm:-ml-3 text-white  place-self-left sm:place-self-center capitalize hover:cursor-pointer font-bold border-gray-400 pr-2 pl-5 sm:pl-0 py-3 rounded'
         onClick={() => {
           setVis(true);
         }}>
-        <ArrowDropDownIcon className='text-black' />
+        <ArrowDropDownIcon className='text-white' />
         {city}
-      </motion.p>
+      </motion.button>
       <div
         onClick={() => {
           setLang(true);
         }}
-        className='text-gray-300 hover:cursor-pointer'>
+        className='text-gray-300 hover:cursor-pointer flex gap-x-2 justify-end pr-6'>
         <TranslateIcon />
+        <Img src={`${router.locale}flag.png`} className='w-5'></Img>
       </div>
     </div>
   );

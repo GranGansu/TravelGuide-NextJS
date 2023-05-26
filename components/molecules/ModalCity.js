@@ -4,19 +4,19 @@ import Link from 'next/link';
 import { paths } from 'pages/api/all';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import { Img } from 'components/atoms';
 
 const idiomas = [
-  { id: 1, name: 'Spanish', url: '/', locale: 'es' },
+  { id: 1, name: 'Español', url: '/', locale: 'es' },
   { id: 2, name: 'English', url: '/', locale: 'en' },
 ];
 export default function ModalCity({ setEstado, number = true }) {
   const router = useRouter();
-
   const [city, setCity] = useGetCity();
   const [visible, setVis] = useState(0);
   const lang = (
     <div>
-      <ul className='text-2xl gap-y-6 flex flex-col select-none'>
+      <div className='text-2xl gap-y-2 flex flex-col items-start select-none'>
         {idiomas.map((idioma) => {
           const active = visible === idioma.id;
           return (
@@ -34,17 +34,24 @@ export default function ModalCity({ setEstado, number = true }) {
                 router.push({ pathname, query }, asPath, { locale: idioma.locale });
                 setVis(idioma.id);
               }}>
-              {' '}
-              <li className='hover:scale-110 hover:cursor-pointer text-3xl'>{idioma.name}</li>
+              <button className='hover:scale-110 hover:cursor-pointer text-3xl'>
+                <Img src={`${idioma.locale}flag.png`} className='w-6'></Img>
+                {idioma.name}
+              </button>
             </motion.div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
   const menu = (
     <div>
       <ul className='text-2xl gap-y-6 flex flex-col select-none'>
+        <motion.div>
+          <Link href='/'>
+            <li className='hover:scale-110 hover:cursor-pointer text-3xl'>Home</li>
+          </Link>
+        </motion.div>
         {paths.map((city) => {
           const active = visible === city.id;
           return (
@@ -61,7 +68,6 @@ export default function ModalCity({ setEstado, number = true }) {
                 setVis(city.id);
                 setCity(city.name.toLowerCase());
               }}>
-              {/* {'${city.name.toLowerCase()}/do '} */}
               <Link href={`/${city.name.toLowerCase()}`}>
                 <li className='hover:scale-110 hover:cursor-pointer text-3xl'>{city.name}</li>
               </Link>

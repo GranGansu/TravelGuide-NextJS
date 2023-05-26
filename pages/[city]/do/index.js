@@ -25,13 +25,14 @@ export default function Do({ rawData, category }) {
     </div>
   );
 }
-export async function getStaticPaths() {
-  return {
-    paths: paths.map((p) => {
-      return `/${p.name.toLowerCase()}/do`;
-    }),
-    fallback: false,
-  };
+export async function getStaticPaths({ locales }) {
+  const todos = [];
+  paths.map((p) => {
+    return locales.map((l) => {
+      todos.push(`/${l}/${p.name.toLowerCase()}/do`);
+    });
+  });
+  return { paths: todos, fallback: false };
 }
 export async function getStaticProps({ params, locale }) {
   const ciudad = params.city;

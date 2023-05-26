@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
             <Absolute className='bg-transparent  z-10 sm:opacity-100 opacity-90 border-b border-orange-300 w-[100vw]'></Absolute>
             <Header city={city}></Header>
           </div>
-          <div className='text-white bg-gray-700/90 border-b border-gray-400 text-center'>
+          <div className='text-white bg-gray-700/90 border-b border-gray-500 text-center'>
             <Announcement></Announcement>
           </div>
           <Page city={city}>
@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }) {
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['home', 'common'])),
+      ...(await serverSideTranslations(locale, ['home', 'common', 'article'])),
       // Will be passed to the page component as props
     },
   };

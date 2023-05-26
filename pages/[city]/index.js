@@ -4,6 +4,7 @@ import { Cards } from 'components/layout/';
 import Head from 'next/head';
 import { head } from '../../configs/globals';
 import { paths } from 'pages/api/all';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 export default function City(props) {
   const [city, setCity] = useGetCity();
@@ -28,15 +29,19 @@ export default function City(props) {
     </>
   );
 }
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
+  const todo = [];
+  paths.map((p) => {
+    locales.map((l) => {
+      todo.push(`/${l}/${p.name.toLowerCase()}`);
+    });
+  });
   return {
-    paths: paths.map((p) => {
-      return `/${p.name.toLowerCase()}`;
-    }),
+    paths: todo,
     fallback: false,
   };
 }
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
   const sqlite3 = require('sqlite3').verbose();
   let db = new sqlite3.Database('data.db');
   const nu = () => {
@@ -53,6 +58,7 @@ export async function getStaticProps({ params }) {
   return {
     props: {
       rawData: ney,
+      ...(await serverSideTranslations(locale, ['main', 'common', 'home'])),
     },
   };
 }

@@ -15,7 +15,7 @@ export default function Banner({ city }) {
     <div className='h-[50vh] flex items-center justify-center text-center px-4 sm:px-0 relative  bg-gray-700/90 overflow-hidden'>
       <motion.div
         className='opacity-100 absolute h-full w-full bg-no-repeat'
-        style={{ backgroundSize: 'cover', backgroundImage: `url(img/${city}.webp)`, backgroundPositionY: y, backgroundPositionX: 'center', opacity: yc }}>
+        style={{ backgroundSize: 'cover', backgroundImage: `url(/img/${city}.webp)`, backgroundPositionY: y, backgroundPositionX: 'center', opacity: yc }}>
         <div className='w-full h-full from-transparent to-gray-600 bg-gradient-to-b'></div>
         {/*         <Img className='w-full h-full object-cover' src={`ciudad.jpg`}></Img> */}
       </motion.div>

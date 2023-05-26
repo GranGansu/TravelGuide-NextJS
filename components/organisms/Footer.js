@@ -22,10 +22,10 @@ export default function Footer() {
           {t('sections')}
         </h2>
         <div className='flex sm:flex-row flex-col gap-4 overflow-x-auto overflow-y-visible'>
-          {secciones.map((t, key) => {
+          {secciones.map((tt, key) => {
             return (
-              <Link key={key} href={'/' + t.url}>
-                <div className='p-4 border rounded hover:bg-gray-600 hover:cursor-pointer'>{t.title}</div>
+              <Link key={key} href={'/' + tt.url}>
+                <div className='p-4 border rounded hover:bg-gray-600 hover:cursor-pointer'>{t(tt.title)}</div>
               </Link>
             );
           })}

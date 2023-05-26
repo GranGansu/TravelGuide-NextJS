@@ -6,20 +6,42 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import ImageGallery from 'react-image-gallery';
 import { useModal } from 'components/hooks';
 import Head from 'next/head';
+import { useTranslation } from 'next-i18next';
+
 export default function Product({ data, city }) {
+  const { t } = useTranslation('article');
   const opiniones = { precio: 5, cultura: 84, compras: 91, imprescindible: 60 };
   const [visible, setVisible] = useModal(false, <ImageGallery items={[{ original: `/img/${data.img}` }]}></ImageGallery>);
   const frame = ({ icon, title, razon, description, warning = false }) => {
     return (
       <div className={`py-4 px-2 bg-gray-0 text-black flex flex-col ${warning && 'shadow-md border rounded-xl px-6'}`}>
         <h3 className=' text-2xl'>
-          {icon} {title}
+          {icon} {t(title)}
         </h3>
         <div className='my-2'>
           <ul className='flex gap-x-2'>
             {razon.map((r) => {
               return (
                 <li className='p-2 border border-inherit text-gray-500 text-sm bg-white rounded px-2' key={r}>
+                  {r}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        {description}
+      </div>
+    );
+  };
+  const warning = ({ icon, title, razon, description }) => {
+    return (
+      <div className={`py-2 px-6 bg-gray-0 flex flex-col bg-red-400 text-white shadow-inner`}>
+        <h3 className=' text-xl'>{t(title)}</h3>
+        <div className='my-2'>
+          <ul className='flex gap-x-2'>
+            {razon.map((r) => {
+              return (
+                <li className='p-1 border border-inherit text-gray-500 text-sm bg-white rounded px-2' key={r}>
                   {r}
                 </li>
               );
@@ -54,38 +76,42 @@ export default function Product({ data, city }) {
               <Img className='w-full h-full object-cover object-top sm:object-center absolute' w='1200' h='800' src={data.img}></Img>
             </div>
 
-            <div className='flex flex-col gap-y-4 text-justify mx-4 -mt-6 z-10'>
-              <p className='p-4 px-6  border bg-gray-100 text-black flex items-center rounded text-md leading-7 gap-x-1'>
-                <VerifiedIcon className='text-gray-700' /> {data.razon[0].toUpperCase() + data.razon.substring(1)}
+            <div className='flex flex-col gap-y-4 text-justify mx-0 -mt-6 z-10'>
+              <p className='p-4 px-6 mx-4 border bg-gray-100 text-black flex items-center justify-center rounded text-md leading-7 gap-x-1'>
+                <VerifiedIcon className='text-gray-400' /> {data.razon[0].toUpperCase() + data.razon.substring(1)}
               </p>
-              {frame({ icon: <WarningAmberIcon className='text-gray-300' />, warning: true, title: 'Debes saber', razon: ['Peligroso'] })}
-              {frame({
-                title: `Por qué visitar ${data.name}`,
-                razon: ['Buen ambiente', 'Mucho sol'],
-                description:
-                  'Es una de las plazas más apreciadas del barrio de Gracia, para salir a tomar una copa y tapear por la noche. Siempre hay mucha animación en la plaza, a veces hay un grupo de jóvenes que tocan música, o bien malabaristas, gente que viene a hacer skate board o a patinar…',
-              })}
-              <div className=' p-6 rounded-lg mt-6 border bg-gray-50'>
-                <p className='text-lg mb-4'>¿En qué destaca {data.name}?</p>
-                <div className='grid sm:grid-cols-2 gap-4'>
-                  {Object.keys(opiniones)
-                    .sort((a, b) => {
-                      return opiniones[b] - opiniones[a];
-                    })
-                    .map((opinion, key) => {
-                      const number = opiniones[opinion];
-                      return (
-                        <div
-                          className='overflow-hidden relative p-4 hover:cursor-pointer select-none border border-gray-200 backdrop-blur-sm rounded-md flex items-center justify-between hover:border-black/20 hover:bg-gray-50'
-                          key={key}>
-                          <div className='relative z-10 items-center flex justify-between w-full'>
-                            <p className='capitalize bg-white p-2 rounded shadow'>{opinion}</p>
-                            <p className='text-xl'>{number}%</p>
+              {warning({ icon: <WarningAmberIcon className='text-gray-300' />, warning: true, title: 'mustknow', razon: ['Peligroso'] })}
+              <div className='mx-4'>
+                {frame({
+                  title: `${t('whyvisit')} ${data.name}`,
+                  razon: ['Buen ambiente', 'Mucho sol'],
+                  description:
+                    'Es una de las plazas más apreciadas del barrio de Gracia, para salir a tomar una copa y tapear por la noche. Siempre hay mucha animación en la plaza, a veces hay un grupo de jóvenes que tocan música, o bien malabaristas, gente que viene a hacer skate board o a patinar…',
+                })}
+                <div className=' p-6 rounded-lg mt-6 border bg-gray-50'>
+                  <p className='text-lg mb-4'>
+                    {t('whatsbest')} {data.name}?
+                  </p>
+                  <div className='grid sm:grid-cols-2 gap-4'>
+                    {Object.keys(opiniones)
+                      .sort((a, b) => {
+                        return opiniones[b] - opiniones[a];
+                      })
+                      .map((opinion, key) => {
+                        const number = opiniones[opinion];
+                        return (
+                          <div
+                            className='overflow-hidden relative p-4 hover:cursor-pointer select-none border border-gray-200 backdrop-blur-sm rounded-md flex items-center justify-between hover:border-black/20 hover:bg-gray-50'
+                            key={key}>
+                            <div className='relative z-10 items-center flex justify-between w-full'>
+                              <p className='capitalize bg-white p-2 rounded shadow'>{opinion}</p>
+                              <p className='text-xl'>{number}%</p>
+                            </div>
+                            <div className='absolute shadow-inner h-full left-0 top-0 z-0 rounded-r-sm relleno' style={{ width: number + '%', opacity: number + '%' }}></div>
                           </div>
-                          <div className='absolute shadow-inner h-full left-0 top-0 z-0 rounded-r-sm relleno' style={{ width: number + '%', opacity: number + '%' }}></div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
+                  </div>
                 </div>
               </div>
             </div>

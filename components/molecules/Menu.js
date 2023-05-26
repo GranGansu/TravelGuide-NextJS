@@ -16,15 +16,15 @@ export default function Menu({ city }) {
     const Icon = i.icon;
     const active = '/[city]/' + i.url === current || current === '/' + i.title;
     return (
-      <motion.li key={key} className={`py-2 sm:p-0 sm:border-0 h-full flex justify-center border-t ${active && 'bg-gray-600 border-t border-yellow-400 '}`}>
+      <motion.li key={key} className={`py-2 sm:p-0 sm:border-0 h-full flex justify-center border-t-2 ${active && 'bg-gray-600 border-t-2 border-yellow-400 '}`}>
         <Link href={`/${i.url !== 'Saved' ? city + '/' : ''}${i.url}`} className='w-full h-full p-4 py-3 flex items-center justify-center'>
           <div className='flex gap-x-2 items-center'>
             {i.url !== 'Saved' && (
-              <p className={`font-thin text-center text-xl sm:text-2xl capitalize ${active ? '   underline-offset-4 text-yellow-200' : 'text-white '}`}>{t(titulo)}</p>
+              <p className={`font-thin text-center text-xl sm:text-2xl capitalize ${active ? '   underline-offset-4 text-yellow-400' : 'text-white '}`}>{t(titulo)}</p>
             )}
             {i.icon && showIcons && <Icon className='fill-white border border-slate-300 rounded-full p-2 box-content shadow-inner'></Icon>}
             {i.url === 'Saved' && (
-              <div className='flex  items-center justify-center'>
+              <div className={`flex  items-center justify-center ${active && 'text-yellow-400'}`}>
                 <BookmarkIcon></BookmarkIcon>
                 <div className='pl-1 rounded-xl text-xl sm:text-2xl font-bold'>{saved}</div>
               </div>

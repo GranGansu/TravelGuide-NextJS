@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Card, Loading } from '../molecules';
 import { hacer, ver } from 'pages/api/all';
+import { useTranslation } from 'react-i18next';
+
 export default function Cardz({ row, filters, rawData, saveIcon = true, setRefresh, category }) {
+  const { t } = useTranslation('main');
   const [dataFiltrada, setDataFiltrada] = useState(null);
   useEffect(() => {
     if (filters !== undefined) {
@@ -51,7 +54,7 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
               setRefresh={setRefresh}></Card>
           );
         })}
-      {dataFiltrada !== null && dataFiltrada.length === 0 && <p className='h-full text-center mx-auto col-span-full'>Ningún artículo que mostrar</p>}
+      {dataFiltrada !== null && dataFiltrada.length === 0 && <p className='h-full text-center mx-auto col-span-full'>{t('empty')}</p>}
     </div>
   );
 }

@@ -13,12 +13,12 @@ export const filtrosver = [
   { id: 6, name: 'views' },
 ];
 export const filtroshacer = [
-  { id: 1, name: 'Parques Diversión' },
-  { id: 2, name: 'Cine' },
-  { id: 3, name: 'Música' },
-  { id: 4, name: 'Teatro' },
-  { id: 5, name: 'Playa' },
-  { id: 6, name: 'Naturaleza' },
+  { id: 1, name: 'amusement' },
+  { id: 2, name: 'cinemas' },
+  { id: 3, name: 'music' },
+  { id: 4, name: 'theatres' },
+  { id: 5, name: 'beaches' },
+  { id: 6, name: 'nature' },
 ];
 export default function handler(req, res) {
   const see = req.query.see;
