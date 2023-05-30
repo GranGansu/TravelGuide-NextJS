@@ -19,7 +19,7 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
     e.preventDefault();
     const localObject = JSON.parse(localStorage[nu]);
     localObject[ecity] = localObject[ecity].filter((p) => {
-      return p !== id;
+      return p !== Number(id);
     });
     if (localObject[ecity].length === 0) {
       delete localObject[ecity];

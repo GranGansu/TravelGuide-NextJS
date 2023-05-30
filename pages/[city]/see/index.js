@@ -16,7 +16,7 @@ export default function See({ rawData, category }) {
         <title>See</title>
         <meta name='description' content='Planes para ver en Barcelona'></meta>
       </Head>
-      <div className='pt-8 pb-2 flex flex-col sm:items-center'>
+      <div className='pt-8 pb-1 flex flex-col sm:items-center'>
         <p className='pl-7 mb-2'>
           {t('showing')} <span className='text-gray-500'>{t('click')}</span>
         </p>

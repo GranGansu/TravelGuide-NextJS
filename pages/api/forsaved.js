@@ -1,9 +1,10 @@
-export default function handler(req, resolve) {
+import { ExecuteStatementCommand } from '@aws-sdk/client-dynamodb';
+import { ddbDocClient } from '../../config';
+
+export default async function handler(req, resolve) {
   const ciudad = req.query.city;
   const category = req.query.category ?? 'ver';
-  const sqlite3 = require('sqlite3').verbose();
-  let db = new sqlite3.Database('data.db');
-  //Declarar errores
+
   const cityId = (city) => {
     const regexNumbers = /\d+[-\d]*/g;
     const regexCity = /^\w*/g;
@@ -11,30 +12,46 @@ export default function handler(req, resolve) {
     const busqueda = city.match(regexNumbers)[0].split('-').join(',');
     return [cit, busqueda];
   };
-  let sql = `SELECT * FROM ${category} WHERE `;
+  let sql = { Statement: `SELECT * FROM "${category}" WHERE ` };
+
   if (typeof ciudad === 'object') {
     ciudad.map((c, key) => {
       const [city, ids] = cityId(c);
-      sql += `${key === 0 ? '' : 'OR'} (city = "${city}" AND id IN (${ids}))`;
+      sql.Statement += `${key === 0 ? '' : 'OR'} (city = '${city}' AND id IN (${ids}))`;
     });
     try {
-      db.all(sql, [], (err, rows) => {
-        if (err) {
-          return resolve.status(404).json(err);
-        }
-        return resolve.status(200).json(rows);
+      const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
+      const datos = data['Items'].map((i) => {
+        let nuevo = {};
+        Object.entries(i).map((n) => {
+          nuevo = { ...nuevo, [n[0]]: Object.values(n[1])[0] };
+        });
+        return nuevo;
       });
+
+      return resolve.status(200).json(datos);
     } catch (err) {
-      return resolve.status(404).json(err);
+      console.error(err);
+      return resolve.status(200).json({ error: err.status });
     }
   } else {
-    const sqli = ciudad.includes('[') ? `${sql} city = "${cityId(ciudad)[0]}" AND id IN (${cityId(ciudad)[1]})` : `${sql} city IN ("${ciudad}") `;
-    db.all(sqli, [], (err, rows) => {
-      if (err) {
-        return resolve.status(404).json(err);
-      }
-      return resolve.status(200).json(rows);
-    });
+    const sqli = {
+      Statement: ciudad.includes('[') ? `${sql.Statement} city = '${cityId(ciudad)[0]}' AND id IN (${cityId(ciudad)[1]})` : `${sql.Statement} city IN ('${ciudad}') `,
+    };
+    console.log(sqli.Statement);
+    try {
+      const data = await ddbDocClient.send(new ExecuteStatementCommand(sqli));
+      const datos = data['Items'].map((i) => {
+        let nuevo = {};
+        Object.entries(i).map((n) => {
+          nuevo = { ...nuevo, [n[0]]: Object.values(n[1])[0] };
+        });
+        return nuevo;
+      });
+      return resolve.status(200).json(datos);
+    } catch (err) {
+      console.error(err);
+      return resolve.status(200).json({ error: err.status });
+    }
   }
-  db.close();
 }
