@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Card, Loading } from '../molecules';
-import { hacer, ver } from 'pages/api/all';
+/* import { hacer, ver } from 'pages/api/all'; */
 import { useTranslation } from 'react-i18next';
 
 export default function Cardz({ row, filters, rawData, saveIcon = true, setRefresh, category }) {
@@ -21,10 +21,9 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
       );
     } else {
       if (rawData !== undefined) {
-        console.log(rawData);
         setDataFiltrada(rawData);
       } else {
-        setDataFiltrada([...hacer, ...ver]);
+        /*     setDataFiltrada([...hacer, ...ver]); */
       }
     }
   }, [filters, rawData]);

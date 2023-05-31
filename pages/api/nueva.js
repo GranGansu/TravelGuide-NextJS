@@ -2,7 +2,7 @@ import { ExecuteStatementCommand } from '@aws-sdk/client-dynamodb';
 import { ddbDocClient } from '../../config';
 
 export default async function handler(req, res) {
-  const params = {
+  /*   const params = {
     Statement: `SELECT * FROM "ver"`,
   };
 
@@ -20,7 +20,7 @@ export default async function handler(req, res) {
   } catch (err) {
     console.error(err);
     return res.status(200).json({ error: err.status });
-  }
+  } */
 }
 /* export const verr = {
   barcelona: [

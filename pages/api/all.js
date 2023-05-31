@@ -21,7 +21,7 @@ export const filtroshacer = [
   { id: 6, name: 'nature' },
 ];
 export default function handler(req, res) {
-  const see = req.query.see;
+  /*   const see = req.query.see;
   const doo = req.query.doo;
   const cat = req.query.cat;
 
@@ -48,10 +48,10 @@ export default function handler(req, res) {
       });
     }
     res.status(200).json(newArray);
-  }
+  } */
 }
 
-export const verr = {
+/* export const verr = {
   barcelona: [
     { city: 'barcelona', id: 1, c: 'see', must: true, cat: 1, name: 'Barcelona Picasso', description: 'Esta película de 1993 estrenada en EEUU', year: 1992, img: 'picasso2.jpg' },
     { city: 'barcelona', id: 2, c: 'see', must: false, cat: 5, name: 'Parc Guell', description: 'Esta película de 1993 estrenada en EEUU', year: 1992, img: 'guell2.jpg' },
@@ -111,3 +111,4 @@ export const hacerr = {
     { city: 'barcelona', id: 4, c: 'do', must: true, cat: 5, name: 'Barceloneta', description: 'Descripción de este gran videojuego', year: 1992, img: 'barceloneta.jpg' },
   ],
 };
+ */

@@ -6,7 +6,7 @@ export default function Se({ post, ci }) {
   return <Product data={post} city={ci} />;
 }
 export async function getStaticPaths({ locales }) {
-  const sqlite3 = require('sqlite3').verbose();
+  /*   const sqlite3 = require('sqlite3').verbose();
   let db = new sqlite3.Database('data.db');
   const todos = [];
   const nu = () => {
@@ -14,7 +14,6 @@ export async function getStaticPaths({ locales }) {
       db.all(`SELECT id, city FROM ver`, [], (err, rows) => {
         rows.map((r) => {
           locales.map((l) => {
-            /* todos.push({ params: { id: r.id.toString(), city: r.city, locale: l } }); */
             todos.push(`/${l}/${r.city}/see/${r.id.toString()}`);
           });
           return { params: { id: r.id.toString(), city: r.city } };
@@ -25,7 +24,15 @@ export async function getStaticPaths({ locales }) {
   };
   const ney = await nu();
   db.close();
-  return { paths: ney, fallback: false };
+  return { paths: ney, fallback: false }; */
+  let sql = { Statement: `SELECT id, city FROM "ver" WHERE c='see'` };
+  const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
+  const datos = data['Items'].map((r) => {
+    return locales.map((l) => {
+      return `/${l}/${r.city.S}/do/${r.id.N.toString()}`;
+    });
+  });
+  return { paths: datos.flat(), fallback: false };
 }
 
 /* export async function getStaticProps({ params, locale }) {
