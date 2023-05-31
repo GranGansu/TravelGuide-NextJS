@@ -73,7 +73,7 @@ export default function Product({ data, city }) {
                   setVisible(true);
                 }}
                 className='absolute z-10 left-0 top-0 w-full h-full bg-gradient-to-b from-gray-600/70 via-transparent to-transparent'></div>
-              <Img className='w-full h-full object-cover object-top sm:object-center absolute' w='1200' h='800' src={data.img}></Img>
+              <Img className='w-full h-full object-cover object-top sm:object-center absolute' w='1200' h='800' src={data.city + '/' + data.img}></Img>
             </div>
 
             <div className='flex flex-col gap-y-4 text-justify mx-0 -mt-6 z-10'>

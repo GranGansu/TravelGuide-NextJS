@@ -5,10 +5,12 @@ import HistoryIcon from '@mui/icons-material/History';
 import { useCountSaved, useGetLocalSaved } from 'components/hooks';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
+import { Loading } from 'components/molecules';
 
 export default function Saved() {
   const { t } = useTranslation('saved');
-  const [doo, setDoo] = useGetLocalSaved();
+  const [loading, setLoading] = useState(true);
+  const [doo, setDoo] = useGetLocalSaved(setLoading);
   const [refresh, setRefresh] = useState(false);
   const [saved, setSaved] = useCountSaved();
   const listaGuardados = useMemo(() => {
@@ -54,6 +56,7 @@ export default function Saved() {
           </button>
         </div>
       </div>
+      {loading && saved !== 0 && <Loading></Loading>}
       {Object.entries(doo).length !== 0 && saved !== 0 ? listaGuardados : <div className='p-6 h-full select-none'>{t('nothing')}</div>}
     </div>
   );

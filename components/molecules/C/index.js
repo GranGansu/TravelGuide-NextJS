@@ -83,7 +83,12 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
                 <BookmarkIcon></BookmarkIcon>
               </motion.div>
             </Absolute>
-            <Img priority={priority} src={img ? img : 'Poster.jpg'} w={480} h={480} className='sm:w-72 w-full h-72 rounded border border-gray-500  object-cover'></Img>
+            <Img
+              priority={priority}
+              src={img ? ecity + '/' + img : 'Poster.jpg'}
+              w={480}
+              h={480}
+              className='sm:w-72 w-full h-72 rounded border border-gray-500  object-cover'></Img>
 
             {/*     {must && <Must />} */}
             {saveIcon ? (

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function useGetLocalSaved() {
+export default function useGetLocalSaved(load) {
   const [saved, setSaved] = useState(0);
   const [results, setResults] = useState(false);
   const reformular = (cityObject, sql) => {
@@ -25,22 +25,25 @@ export default function useGetLocalSaved() {
       const di = reformular(doo, sqlH);
       const si = reformular(see, sqlV);
       if (di !== template && si !== template) {
-        axios.get(di + '&category=hacer').then((res) => {
+        axios.get(di + '&category=do').then((res) => {
           todos.push(...res.data);
-          axios.get(si + '&category=ver').then((res) => {
+          axios.get(si + '&category=see').then((res) => {
             todos.push(...res.data);
             setResults(todos);
+            load(false);
           });
         });
       } else if (si !== template) {
-        axios.get(si + '&category=ver').then((res) => {
+        axios.get(si + '&category=see').then((res) => {
           todos.push(...res.data);
           setResults(todos);
+          load(false);
         });
       } else if (di !== template) {
-        axios.get(di + '&category=hacer').then((res) => {
+        axios.get(di + '&category=do').then((res) => {
           todos.push(...res.data);
           setResults(todos);
+          load(false);
         });
       }
     }

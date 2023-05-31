@@ -1,6 +1,7 @@
 import Product from 'components/layout/Product';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useTranslation } from 'next-i18next';
+import { ExecuteStatementCommand } from '@aws-sdk/client-dynamodb';
+import { ddbDocClient } from '../../../config';
 export default function Doo({ post, ci }) {
   /*   const router = useRouter();
   const { id } = router.query;
@@ -34,7 +35,7 @@ export async function getStaticPaths({ locales }) {
   db.close();
   return { paths: ney, fallback: false };
 }
-export async function getStaticProps({ params, locale }) {
+/* export async function getStaticProps({ params, locale }) {
   const ciudad = params.city.toString();
   const sqlite3 = require('sqlite3').verbose();
   let db = new sqlite3.Database('data.db');
@@ -49,4 +50,18 @@ export async function getStaticProps({ params, locale }) {
   db.close();
   const ci = params.city;
   return { props: { post: ney, ci, ...(await serverSideTranslations(locale, ['saved', 'article', 'common'])) } };
+}
+ */
+export async function getStaticProps({ params, locale }) {
+  const ciudad = params.city.toString();
+  let sql = { Statement: `SELECT * FROM "ver" WHERE c='do' AND city='${ciudad}' AND id=${params.id}` };
+  const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
+  const datos = data['Items'].map((i) => {
+    let nuevo = {};
+    Object.entries(i).map((n) => {
+      nuevo = { ...nuevo, [n[0]]: n[0] === 'id' || n[0] === 'cat' ? Number(Object.values(n[1])[0]) : Object.values(n[1])[0] };
+    });
+    return nuevo;
+  })[0];
+  return { props: { post: datos, ci: ciudad, ...(await serverSideTranslations(locale, ['saved', 'article', 'common'])) } };
 }

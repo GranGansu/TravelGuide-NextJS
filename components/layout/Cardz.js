@@ -21,6 +21,7 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
       );
     } else {
       if (rawData !== undefined) {
+        console.log(rawData);
         setDataFiltrada(rawData);
       } else {
         setDataFiltrada([...hacer, ...ver]);

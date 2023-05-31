@@ -5,7 +5,8 @@ import Head from 'next/head';
 import { head } from '../../configs/globals';
 import { paths } from 'pages/api/all';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
+import { ExecuteStatementCommand } from '@aws-sdk/client-dynamodb';
+import { ddbDocClient } from '../../config';
 export default function City(props) {
   const [city, setCity] = useGetCity();
 
@@ -41,7 +42,7 @@ export async function getStaticPaths({ locales }) {
     fallback: false,
   };
 }
-export async function getStaticProps({ params, locale }) {
+/* export async function getStaticProps({ params, locale }) {
   const sqlite3 = require('sqlite3').verbose();
   let db = new sqlite3.Database('data.db');
   const nu = () => {
@@ -59,6 +60,24 @@ export async function getStaticProps({ params, locale }) {
     props: {
       rawData: ney,
       ...(await serverSideTranslations(locale, ['main', 'common', 'home'])),
+    },
+  };
+} */
+export async function getStaticProps({ params, locale }) {
+  const ciudad = params.city;
+  let sql = { Statement: `SELECT * FROM "ver" WHERE c='see' AND city='${ciudad}'` };
+  const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
+  const datos = data['Items'].map((i) => {
+    let nuevo = {};
+    Object.entries(i).map((n) => {
+      nuevo = { ...nuevo, [n[0]]: n[0] === 'id' || n[0] === 'cat' ? Number(Object.values(n[1])[0]) : Object.values(n[1])[0] };
+    });
+    return nuevo;
+  });
+  return {
+    props: {
+      rawData: datos,
+      ...(await serverSideTranslations(locale, ['home', 'common'])),
     },
   };
 }

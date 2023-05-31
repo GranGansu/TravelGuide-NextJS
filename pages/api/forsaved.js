@@ -3,7 +3,7 @@ import { ddbDocClient } from '../../config';
 
 export default async function handler(req, resolve) {
   const ciudad = req.query.city;
-  const category = req.query.category ?? 'ver';
+  const category = req.query.category ?? 'see';
 
   const cityId = (city) => {
     const regexNumbers = /\d+[-\d]*/g;
@@ -12,13 +12,14 @@ export default async function handler(req, resolve) {
     const busqueda = city.match(regexNumbers)[0].split('-').join(',');
     return [cit, busqueda];
   };
-  let sql = { Statement: `SELECT * FROM "${category}" WHERE ` };
+  let sql = { Statement: `SELECT * FROM "ver" WHERE ` };
 
   if (typeof ciudad === 'object') {
     ciudad.map((c, key) => {
       const [city, ids] = cityId(c);
-      sql.Statement += `${key === 0 ? '' : 'OR'} (city = '${city}' AND id IN (${ids}))`;
+      sql.Statement += `${key === 0 ? '' : ' OR'} (city = '${city}' AND c='${category}' AND id IN (${ids}))`;
     });
+    console.log(sql.Statement);
     try {
       const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
       const datos = data['Items'].map((i) => {
@@ -36,9 +37,10 @@ export default async function handler(req, resolve) {
     }
   } else {
     const sqli = {
-      Statement: ciudad.includes('[') ? `${sql.Statement} city = '${cityId(ciudad)[0]}' AND id IN (${cityId(ciudad)[1]})` : `${sql.Statement} city IN ('${ciudad}') `,
+      Statement: ciudad.includes('[')
+        ? `${sql.Statement} city = '${cityId(ciudad)[0]}' AND c='${category}' AND id IN (${cityId(ciudad)[1]})`
+        : `${sql.Statement} city IN ('${ciudad}') `,
     };
-    console.log(sqli.Statement);
     try {
       const data = await ddbDocClient.send(new ExecuteStatementCommand(sqli));
       const datos = data['Items'].map((i) => {
