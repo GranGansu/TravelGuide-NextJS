@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Card } from '../molecules';
+import { Card } from '../components/molecules';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 

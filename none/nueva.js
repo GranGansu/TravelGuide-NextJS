@@ -1,5 +1,5 @@
 import { ExecuteStatementCommand } from '@aws-sdk/client-dynamodb';
-import { ddbDocClient } from '../../config';
+import { ddbDocClient } from '../config';
 
 export default async function handler(req, res) {
   /*   const params = {
