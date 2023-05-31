@@ -1,7 +1,7 @@
 import Product from 'components/layout/Product';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { ExecuteStatementCommand } from '@aws-sdk/client-dynamodb';
-import { ddbDocClient } from '../../../config';
+import { cityPaths, cityProps } from 'utils/static';
+
 export default function Doo({ post, ci }) {
   /*   const router = useRouter();
   const { id } = router.query;
@@ -33,14 +33,14 @@ export async function getStaticPaths({ locales }) {
   const ney = await nu();
   db.close(); */
 
-  let sql = { Statement: `SELECT id, city FROM "ver" WHERE c='do'` };
+  /*   let sql = { Statement: `SELECT id, city FROM "ver" WHERE c='do'` };
   const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
   const datos = data['Items'].map((r) => {
     return locales.map((l) => {
       return `/${l}/${r.city.S}/do/${r.id.N.toString()}`;
     });
-  });
-  return { paths: datos.flat(), fallback: false };
+  }); */
+  return { paths: await cityPaths('do', locales), fallback: false };
 }
 
 /* export async function getStaticPaths({ locales }) {
@@ -74,7 +74,7 @@ export async function getStaticPaths({ locales }) {
  */
 export async function getStaticProps({ params, locale }) {
   const ciudad = params.city.toString();
-  let sql = { Statement: `SELECT * FROM "ver" WHERE c='do' AND city='${ciudad}' AND id=${params.id}` };
+  /*   let sql = { Statement: `SELECT * FROM "ver" WHERE c='do' AND city='${ciudad}' AND id=${params.id}` };
   const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
   const datos = data['Items'].map((i) => {
     let nuevo = {};
@@ -82,6 +82,7 @@ export async function getStaticProps({ params, locale }) {
       nuevo = { ...nuevo, [n[0]]: n[0] === 'id' || n[0] === 'cat' ? Number(Object.values(n[1])[0]) : Object.values(n[1])[0] };
     });
     return nuevo;
-  })[0];
-  return { props: { post: datos, ci: ciudad, ...(await serverSideTranslations(locale, ['saved', 'article', 'common'])) } };
+  })[0]; */
+
+  return { props: { post: await cityProps(ciudad, params.id, 'do'), ci: ciudad, ...(await serverSideTranslations(locale, ['saved', 'article', 'common'])) } };
 }

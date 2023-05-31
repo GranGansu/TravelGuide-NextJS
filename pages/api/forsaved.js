@@ -19,7 +19,6 @@ export default async function handler(req, resolve) {
       const [city, ids] = cityId(c);
       sql.Statement += `${key === 0 ? '' : ' OR'} (city = '${city}' AND c='${category}' AND id IN (${ids}))`;
     });
-    console.log(sql.Statement);
     try {
       const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
       const datos = data['Items'].map((i) => {
