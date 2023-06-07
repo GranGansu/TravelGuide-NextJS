@@ -51,7 +51,6 @@ export default function useGetLocalSaved(load, refy, set, refresh) {
         });
       }
     } else {
-      console.log('tic');
       if (saved !== 0) {
         setResults(refy.data);
       }

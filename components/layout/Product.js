@@ -7,8 +7,11 @@ import ImageGallery from 'react-image-gallery';
 import { useModal } from 'components/hooks';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
+import { useContext } from 'react';
+import { ReloadContext } from '../../pages/_app';
 
 export default function Product({ data, city }) {
+  const [reload, setReload] = useContext(ReloadContext);
   const { t } = useTranslation('article');
   const opiniones = { precio: 5, cultura: 84, compras: 91, imprescindible: 60 };
   const [visible, setVisible] = useModal(false, <ImageGallery items={[{ original: `/img/${data.city}/${data.img}` }]}></ImageGallery>);
@@ -66,7 +69,7 @@ export default function Product({ data, city }) {
           <div className='pb-6 grid grid-cols-1  text-black '>
             <div className='w-full h-72 sm:h-96 shadow-inner border-b relative flex items-center'>
               <div className='absolute right-4 bottom-10 shadow-xl z-20'>
-                <Save city={city} id={data.id} cat={data.c} contrast={true} />
+                <Save setReload={setReload} city={city} id={data.id} cat={data.c} contrast={true} />
               </div>
               <div
                 onClick={() => {

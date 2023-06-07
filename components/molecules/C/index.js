@@ -92,8 +92,8 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
             <Img
               priority={priority}
               src={img ? ecity + '/' + img : 'Poster.jpg'}
-              w={480}
-              h={480}
+              w={300}
+              h={300}
               className='sm:w-72 w-full h-72 rounded border border-gray-500  object-cover'></Img>
 
             {/*     {must && <Must />} */}
