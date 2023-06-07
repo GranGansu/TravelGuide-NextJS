@@ -43,7 +43,7 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
               row={row}
               city={category !== undefined ? category : element.cc}
               ecity={element.city}
-              priority={key === 0 && true}
+              priority={(key === 0 || key === 1) && true}
               key={key + '0' + element.id + element.name.length}
               saveIcon={saveIcon}
               must={element.must}

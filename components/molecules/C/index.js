@@ -29,9 +29,14 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
     }
     localStorage[nu] = JSON.stringify({ ...localObject });
     setSaved((prev) => !prev);
-    setRefresh((prev) => !prev);
+    /*   setRefresh((prev) => !prev); */
     setReload((prev) => {
-      return { ...prev, current: true };
+      return {
+        data: prev.data.filter((o) => {
+          return Number(o.id) !== Number(id);
+        }),
+        current: false,
+      };
     });
   };
   const variants = { active: { opacity: 1, scale: 5.5 }, inactive: { opacity: 0, scale: 0 } };
