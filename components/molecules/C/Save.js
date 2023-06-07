@@ -4,7 +4,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import { useTranslation } from 'next-i18next';
 
-export default function Save({ id, cat, contrast = false, setChecked = () => {}, checked, city }) {
+export default function Save({ id, cat, contrast = false, setChecked = () => {}, checked, city, setReload }) {
   const [a, setSaved] = useCountSaved();
   const { t } = useTranslation('common');
   const [visible, setVisible] = useState(checked);
@@ -19,6 +19,9 @@ export default function Save({ id, cat, contrast = false, setChecked = () => {},
       localObject[city].push(id);
     }
     localStorage[nu] = JSON.stringify(localObject);
+    setReload((prev) => {
+      return { ...prev, current: true };
+    });
   };
   const Save = () => {
     return visible ? (

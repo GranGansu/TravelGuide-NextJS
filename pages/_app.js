@@ -8,6 +8,7 @@ import { createContext, useState, useEffect } from 'react';
 import Announcement from '../components/molecules/Announcement';
 const SavedContext = createContext(null);
 const CityContext = createContext(null);
+const ReloadContext = createContext(null);
 import { useRouter } from 'next/router';
 import { paths } from './api/all';
 import { appWithTranslation } from 'next-i18next';
@@ -16,6 +17,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [saved, setSaved] = useState(0);
+  const [inc, setInc] = useState({ current: true, data: null });
   const [city, setCity] = useState('barcelona');
   useEffect(() => {
     if (localStorage.doNUEVO === undefined) {
@@ -50,9 +52,11 @@ function MyApp({ Component, pageProps }) {
           <div className='text-white bg-gray-700/90 border-b border-gray-500 text-center'>
             <Announcement></Announcement>
           </div>
-          <Page city={city}>
-            <Component {...pageProps} />
-          </Page>
+          <ReloadContext.Provider value={[inc, setInc]}>
+            <Page city={city}>
+              <Component {...pageProps} refy={inc} set={setInc} />
+            </Page>
+          </ReloadContext.Provider>
           <Footer></Footer>
         </CityContext.Provider>
       </SavedContext.Provider>
@@ -67,5 +71,5 @@ export async function getStaticProps({ locale }) {
     },
   };
 }
-export { SavedContext, CityContext };
+export { SavedContext, CityContext, ReloadContext };
 export default appWithTranslation(MyApp);

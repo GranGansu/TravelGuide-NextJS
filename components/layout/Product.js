@@ -11,7 +11,7 @@ import { useTranslation } from 'next-i18next';
 export default function Product({ data, city }) {
   const { t } = useTranslation('article');
   const opiniones = { precio: 5, cultura: 84, compras: 91, imprescindible: 60 };
-  const [visible, setVisible] = useModal(false, <ImageGallery items={[{ original: `/img/${data.img}` }]}></ImageGallery>);
+  const [visible, setVisible] = useModal(false, <ImageGallery items={[{ original: `/img/${data.city}/${data.img}` }]}></ImageGallery>);
   const frame = ({ icon, title, razon, description, warning = false }) => {
     return (
       <div className={`py-4 px-2 bg-gray-0 text-black flex flex-col ${warning && 'shadow-md border rounded-xl px-6'}`}>
@@ -80,7 +80,7 @@ export default function Product({ data, city }) {
               <p className='p-4 px-6 mx-4 border bg-gray-100 text-black flex items-center justify-center rounded text-md leading-7 gap-x-1'>
                 <VerifiedIcon className='text-gray-400' /> {data.razon[0].toUpperCase() + data.razon.substring(1)}
               </p>
-              {warning({ icon: <WarningAmberIcon className='text-gray-300' />, warning: true, title: 'mustknow', razon: ['Peligroso'] })}
+              {/*          {warning({ icon: <WarningAmberIcon className='text-gray-300' />, warning: true, title: 'mustknow', razon: ['Peligroso'] })} */}
               <div className='mx-4'>
                 {frame({
                   title: `${t('whyvisit')} ${data.name}`,

@@ -3,7 +3,7 @@ import { Card, Loading } from '../molecules';
 /* import { hacer, ver } from 'pages/api/all'; */
 import { useTranslation } from 'react-i18next';
 
-export default function Cardz({ row, filters, rawData, saveIcon = true, setRefresh, category }) {
+export default function Cardz({ row, filters, rawData, saveIcon = true, setRefresh, category, setReload }) {
   const { t } = useTranslation('main');
   const [dataFiltrada, setDataFiltrada] = useState(null);
   useEffect(() => {
@@ -51,6 +51,7 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
               id={element.id}
               img={element.img}
               cat={element.c}
+              setReload={setReload}
               setRefresh={setRefresh}></Card>
           );
         })}

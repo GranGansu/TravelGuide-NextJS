@@ -22,7 +22,7 @@ export default function ModalCity({ setEstado, number = true }) {
           return (
             <motion.div
               animate={{ scale: active ? 5 : 1, background: 'transparent', padding: '20px', fontWeight: active ? 'bold' : 'initial' }}
-              key={idioma.url}
+              key={idioma.locale}
               onAnimationComplete={(e) => {
                 if (visible === idioma.id) {
                   setEstado(true);

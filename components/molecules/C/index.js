@@ -3,15 +3,18 @@ import Link from 'next/link';
 import Must from './Must';
 import Save from './Save';
 import { motion } from 'framer-motion';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useContext } from 'react';
 import useCountSaved from '../../hooks/useCountSaved';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useTranslation } from 'react-i18next';
+import { ReloadContext } from '../../../pages/_app';
 
 export default function C({ id, title, img, cat, must, saveIcon, setRefresh, priority, city, row, ecity }) {
   const [a, setSaved] = useCountSaved();
   const [checked, setChecked] = useState(false);
+  const [reload, setReload] = useContext(ReloadContext);
+
   const [background, setBackground] = useState(false);
   const { t } = useTranslation('common');
   const handleDelete = (e) => {
@@ -27,6 +30,9 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
     localStorage[nu] = JSON.stringify({ ...localObject });
     setSaved((prev) => !prev);
     setRefresh((prev) => !prev);
+    setReload((prev) => {
+      return { ...prev, current: true };
+    });
   };
   const variants = { active: { opacity: 1, scale: 5.5 }, inactive: { opacity: 0, scale: 0 } };
   /*   const carta = useMemo(() => {
@@ -93,7 +99,7 @@ export default function C({ id, title, img, cat, must, saveIcon, setRefresh, pri
             {/*     {must && <Must />} */}
             {saveIcon ? (
               <div className='absolute bottom-0 mb-6 flex gap-x-4 justify-center w-full fill-white '>
-                <Save city={city ? city : ecity} id={id} cat={cat} setChecked={setChecked} checked={checked} />
+                <Save setReload={setReload} city={city ? city : ecity} id={id} cat={cat} setChecked={setChecked} checked={checked} />
               </div>
             ) : (
               <div className='flex gap-x-2 justify-stretch z-10 relative '>

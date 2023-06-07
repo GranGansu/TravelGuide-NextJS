@@ -1,23 +1,24 @@
 import { useState, useEffect, useMemo } from 'react';
-import Cardz from '../components/layout/Cardz';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import HistoryIcon from '@mui/icons-material/History';
 import { useCountSaved, useGetLocalSaved } from 'components/hooks';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import { Loading } from 'components/molecules';
+import { Cards } from 'components/layout';
 
-export default function Saved() {
+export default function Saved({ refy, set }) {
   const { t } = useTranslation('saved');
   const [loading, setLoading] = useState(true);
-  const [doo, setDoo] = useGetLocalSaved(setLoading);
   const [refresh, setRefresh] = useState(false);
-  const [saved, setSaved] = useCountSaved();
+  const [results, setResults] = useGetLocalSaved(setLoading, refy, set, refresh);
+  const [saved, setSaved] = useCountSaved(set);
   const listaGuardados = useMemo(() => {
-    return <Cardz setRefresh={setRefresh} rawData={doo} saveIcon={false}></Cardz>;
-  }, [doo]);
+    return <Cards setReload={set} setRefresh={setRefresh} rawData={results} saveIcon={false}></Cards>;
+  }, [results]);
   useEffect(() => {
-    setDoo((prev) => !prev);
+    //Esto puede ayudar a solventar el problema, no sé cómo
+    setResults((prev) => !prev);
   }, [saved]);
   return (
     <div className='bg-gray-700/90 flex-grow min-h-[300px] w-full flex flex-col  items-center'>
@@ -56,8 +57,13 @@ export default function Saved() {
           </button>
         </div>
       </div>
-      {loading && saved !== 0 && <Loading></Loading>}
-      {Object.entries(doo).length !== 0 && saved !== 0 ? listaGuardados : <div className='p-6 h-full select-none'>{t('nothing')}</div>}
+      {results && Object.entries(results).length !== 0 && saved !== 0 ? (
+        listaGuardados
+      ) : loading && saved !== 0 ? (
+        <Loading className='mt-8'></Loading>
+      ) : (
+        <div className='p-6 h-full select-none'>{t('nothing')}</div>
+      )}
     </div>
   );
 }

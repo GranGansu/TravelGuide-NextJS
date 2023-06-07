@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import { SavedContext } from '../../pages/_app';
 
-export default function useCountSaved() {
+export default function useCountSaved(set) {
   const [refresh, setRefresh] = useState(0);
   const [saved, setSaved] = useContext(SavedContext);
 

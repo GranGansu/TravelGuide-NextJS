@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function useGetLocalSaved(load) {
+export default function useGetLocalSaved(load, refy, set, refresh) {
   const [saved, setSaved] = useState(0);
   const [results, setResults] = useState(false);
   const reformular = (cityObject, sql) => {
@@ -15,7 +15,7 @@ export default function useGetLocalSaved(load) {
     return sql;
   };
   useEffect(() => {
-    if (saved !== 0) {
+    if (saved !== 0 && refy.current) {
       const todos = [];
       const see = localStorage.seeNUEVO !== undefined && localStorage.seeNUEVO !== '' && JSON.parse(localStorage.seeNUEVO);
       const doo = localStorage.doNUEVO !== undefined && localStorage.doNUEVO !== '' && JSON.parse(localStorage.doNUEVO);
@@ -31,20 +31,29 @@ export default function useGetLocalSaved(load) {
             todos.push(...res.data);
             setResults(todos);
             load(false);
+            set({ current: false, data: todos });
           });
         });
       } else if (si !== template) {
         axios.get(si + '&category=see').then((res) => {
           todos.push(...res.data);
           setResults(todos);
+          set({ current: false, data: todos });
+
           load(false);
         });
       } else if (di !== template) {
         axios.get(di + '&category=do').then((res) => {
           todos.push(...res.data);
           setResults(todos);
+          set({ current: false, data: todos });
           load(false);
         });
+      }
+    } else {
+      console.log('tic');
+      if (saved !== 0) {
+        setResults(refy.data);
       }
     }
   }, [saved]);
