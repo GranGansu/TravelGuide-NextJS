@@ -1,7 +1,10 @@
 import NewPage from 'components/layout/NewPage';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-export default function ya() {
-  const paises = ['Argentina', 'España', 'Marrecos', 'Chile'];
+export default function Ya() {
+  const { t } = useTranslation('common');
+  const paises = ['Argentina', 'España', 'Marruecos', 'Chile'];
   const opciones = [
     { name: 'Comidita en el born', price: 1.5 },
     { name: 'Peluches', price: 2.3 },
@@ -37,4 +40,12 @@ export default function ya() {
       </ul>
     </NewPage>
   );
+}
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['saved', 'common'])),
+      // Will be passed to the page component as props
+    },
+  };
 }

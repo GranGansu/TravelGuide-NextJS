@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function useGetLocalSaved(load, refy, set, refresh) {
+export default function useGetLocalSaved(load, refy, set, savedNumber) {
   const [saved, setSaved] = useState(0);
   const [results, setResults] = useState(false);
   const reformular = (cityObject, sql) => {
@@ -15,35 +15,34 @@ export default function useGetLocalSaved(load, refy, set, refresh) {
     return sql;
   };
   useEffect(() => {
-    if (saved !== 0 && refy.current) {
+    if ((saved !== 0 && refy.current) || (savedNumber !== refy.data.length && savedNumber !== 0)) {
       const todos = [];
       const see = localStorage.seeNUEVO !== undefined && localStorage.seeNUEVO !== '' && JSON.parse(localStorage.seeNUEVO);
       const doo = localStorage.doNUEVO !== undefined && localStorage.doNUEVO !== '' && JSON.parse(localStorage.doNUEVO);
       let sqlV = '/api/forsaved?city=';
       let sqlH = '/api/forsaved?city=';
       let template = '/api/forsaved?city=';
-      const di = reformular(doo, sqlH);
-      const si = reformular(see, sqlV);
-      if (di !== template && si !== template) {
-        axios.get(di + '&category=do').then((res) => {
+      const diReformulado = reformular(doo, sqlH);
+      const siReformulado = reformular(see, sqlV);
+      if (diReformulado !== template && siReformulado !== template) {
+        axios.get(diReformulado + '&category=do').then((res) => {
           todos.push(...res.data);
-          axios.get(si + '&category=see').then((res) => {
+          axios.get(siReformulado + '&category=see').then((res) => {
             todos.push(...res.data);
             setResults(todos);
             load(false);
             set({ current: false, data: todos });
           });
         });
-      } else if (si !== template) {
-        axios.get(si + '&category=see').then((res) => {
+      } else if (siReformulado !== template) {
+        axios.get(siReformulado + '&category=see').then((res) => {
           todos.push(...res.data);
           setResults(todos);
           set({ current: false, data: todos });
-
           load(false);
         });
-      } else if (di !== template) {
-        axios.get(di + '&category=do').then((res) => {
+      } else if (diReformulado !== template) {
+        axios.get(diReformulado + '&category=do').then((res) => {
           todos.push(...res.data);
           setResults(todos);
           set({ current: false, data: todos });
@@ -51,10 +50,12 @@ export default function useGetLocalSaved(load, refy, set, refresh) {
         });
       }
     } else {
-      if (saved !== 0) {
+      if (savedNumber !== 0) {
         setResults(refy.data);
+      } else {
+        setResults([]);
       }
     }
-  }, [saved]);
+  }, [saved, savedNumber]);
   return [results, setSaved];
 }

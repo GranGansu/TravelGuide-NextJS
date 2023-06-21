@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import HistoryIcon from '@mui/icons-material/History';
 import { useCountSaved, useGetLocalSaved } from 'components/hooks';
@@ -11,32 +11,28 @@ export default function Saved({ refy, set }) {
   const { t } = useTranslation('saved');
   const [loading, setLoading] = useState(true);
   const [refresh, setRefresh] = useState(false);
-  const [results, setResults] = useGetLocalSaved(setLoading, refy, set, refresh);
-  const [saved, setSaved] = useCountSaved(set);
-  const listaGuardados = useMemo(() => {
-    return <Cards setReload={set} setRefresh={setRefresh} rawData={results} saveIcon={false}></Cards>;
-  }, [results]);
+  const [savedNumber, updateSaved] = useCountSaved(set);
+  const [results, setResults] = useGetLocalSaved(setLoading, refy, set, savedNumber);
   useEffect(() => {
-    //Esto puede ayudar a solventar el problema, no sé cómo
     setResults((prev) => !prev);
-  }, [saved]);
+  }, [savedNumber, refresh]);
   return (
     <div className='bg-gray-700/90 flex-grow min-h-[300px] w-full flex flex-col  items-center'>
       <div className='flex gap-x-2 w-full items-center mt-6 select-none sm:justify-center justify-between px-6'>
         <h1 className=' text-center text-white '>
-          <span className='bg-gray-700/90 rounded p-2 px-4 text-lg border border-gray-500'>{t('h1')}</span>
+          <span className=' rounded p-2 px-4 text-lg '>{t('h1')}</span>
         </h1>
         <div className='flex gap-x-1'>
           <button
             className='p-2 flex w-fit bg-gray-800 hover:bg-red-400 rounded border border-gray-500 hover:cursor-pointer'
             onClick={() => {
-              if (saved !== 0) {
+              if (savedNumber !== 0) {
                 localStorage.doPREV = localStorage.doNUEVO;
                 localStorage.seePREV = localStorage.seeNUEVO;
                 localStorage.doNUEVO = JSON.stringify({});
                 localStorage.seeNUEVO = JSON.stringify({});
                 setRefresh((prev) => !prev);
-                setSaved((prev) => !prev);
+                updateSaved((prev) => !prev);
               }
             }}>
             <DeleteForeverIcon />
@@ -49,7 +45,7 @@ export default function Saved({ refy, set }) {
                 localStorage.doNUEVO = localStorage.doPREV;
                 localStorage.seeNUEVO = localStorage.seePREV;
                 setRefresh((prev) => !prev);
-                setSaved((prev) => !prev);
+                updateSaved((prev) => !prev);
               }
             }}>
             <HistoryIcon />
@@ -57,9 +53,9 @@ export default function Saved({ refy, set }) {
           </button>
         </div>
       </div>
-      {results && Object.entries(results).length !== 0 && saved !== 0 ? (
-        listaGuardados
-      ) : loading && saved !== 0 ? (
+      {results ? (
+        <Cards rawData={results} saveIcon={false}></Cards>
+      ) : loading && savedNumber !== 0 ? (
         <Loading className='mt-8'></Loading>
       ) : (
         <div className='p-6 h-full select-none'>{t('nothing')}</div>
@@ -71,9 +67,7 @@ export default function Saved({ refy, set }) {
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['saved', 'common'])),
-      // Will be passed to the page component as props
+      ...(await serverSideTranslations(locale, ['saved', 'common', 'main'])),
     },
   };
 }
-//         disabled={localStorage.doPREV === undefined && true}

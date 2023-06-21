@@ -17,7 +17,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [saved, setSaved] = useState(0);
-  const [inc, setInc] = useState({ current: true, data: null });
+  const [globalData, setGlobalData] = useState({ current: true, data: [] });
   const [city, setCity] = useState('barcelona');
   useEffect(() => {
     if (localStorage.doNUEVO === undefined) {
@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }) {
     if (localStorage.seeNUEVO === undefined) {
       localStorage.seeNUEVO = JSON.stringify({});
     }
-    setCity((prev) => {
+    setCity(() => {
       const devolver = [];
       paths.map((p) => {
         if (router.query.city?.toLowerCase().includes(p.name.toLowerCase())) {
@@ -52,9 +52,9 @@ function MyApp({ Component, pageProps }) {
           <div className='text-white bg-gray-700/90 border-b border-gray-500 text-center'>
             <Announcement></Announcement>
           </div>
-          <ReloadContext.Provider value={[inc, setInc]}>
+          <ReloadContext.Provider value={[globalData, setGlobalData]}>
             <Page city={city}>
-              <Component {...pageProps} refy={inc} set={setInc} />
+              <Component {...pageProps} refy={globalData} set={setGlobalData} />
             </Page>
           </ReloadContext.Provider>
           <Footer></Footer>

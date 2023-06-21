@@ -1,42 +1,36 @@
 import { useEffect, useState } from 'react';
 import { Card, Loading } from '../molecules';
-/* import { hacer, ver } from 'pages/api/all'; */
 import { useTranslation } from 'react-i18next';
 
-export default function Cardz({ row, filters, rawData, saveIcon = true, setRefresh, category, setReload }) {
+export default function Cardz({ row, filters, rawData, saveIcon = true, category }) {
   const { t } = useTranslation('main');
   const [dataFiltrada, setDataFiltrada] = useState(null);
+  let loading = dataFiltrada === null;
+  let data = dataFiltrada !== null && dataFiltrada.length !== 0;
   useEffect(() => {
-    if (filters !== undefined) {
-      setDataFiltrada(
-        rawData.filter((d) => {
-          return (
-            filters
-              .map((f) => {
-                return f.id;
-              })
-              .includes(d.cat) && d
-          );
-        })
-      );
-    } else {
-      if (rawData !== undefined) {
-        setDataFiltrada(rawData);
-      } else {
-        /*     setDataFiltrada([...hacer, ...ver]); */
-      }
-    }
+    setDataFiltrada(
+      filters === undefined
+        ? rawData
+        : rawData.filter((d) => {
+            return (
+              filters
+                .map((f) => {
+                  return f.id;
+                })
+                .includes(d.cat) && d
+            );
+          })
+    );
   }, [filters, rawData]);
   return (
     <div
       className={`p-6 overflow-x-auto  mx-auto  ${row ? 'flex gap-x-4' : 'grid grid-cols-1 gap-x-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:w-fit w-full mx-auto gap-y-4'}`}>
-      {dataFiltrada === null && (
+      {loading && (
         <div className='mx-auto col-span-full py-14'>
           <Loading />
         </div>
       )}
-      {dataFiltrada !== null &&
-        dataFiltrada.length !== 0 &&
+      {data &&
         dataFiltrada.map((element, key) => {
           return (
             <Card
@@ -50,12 +44,10 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, setRefre
               title={element.name}
               id={element.id}
               img={element.img}
-              cat={element.c}
-              setReload={setReload}
-              setRefresh={setRefresh}></Card>
+              cat={element.c}></Card>
           );
         })}
-      {dataFiltrada !== null && dataFiltrada.length === 0 && <p className='h-full text-center mx-auto col-span-full'>{t('empty')}</p>}
+      {!data && <p className='h-full text-center mx-auto col-span-full'>{t('empty')}</p>}
     </div>
   );
 }
