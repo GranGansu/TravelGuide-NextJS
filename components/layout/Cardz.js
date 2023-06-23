@@ -47,7 +47,7 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, category
               cat={element.c}></Card>
           );
         })}
-      {!data && <p className='h-full text-center mx-auto col-span-full'>{t('empty')}</p>}
+      {!data && !loading && <p className='h-full text-center mx-auto col-span-full'>{t('empty')}</p>}
     </div>
   );
 }

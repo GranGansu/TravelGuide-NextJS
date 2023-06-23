@@ -4,3 +4,4 @@ export { default as Img } from './Img';
 export { default as Absolute } from './Absolute';
 export { default as Ejercicio } from './Ejercicio';
 export { default as Button } from './Button';
+export { default as ListItem } from './ListItem';

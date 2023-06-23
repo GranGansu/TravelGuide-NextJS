@@ -67,7 +67,7 @@ export default function Product({ data, city }) {
           {visible}
           <h1 className='p-4 px-6 absolute  z-20  text-2xl'>{data.name}</h1>
           <div className='pb-6 grid grid-cols-1  text-black '>
-            <div className='w-full h-72 sm:h-96 shadow-inner border-b relative flex items-center'>
+            <motion.div animate={{ scale: 1 }} initial={{ scale: 0.8 }} className='w-full h-72 sm:h-96 shadow-inner border-b relative flex items-center'>
               <div className='absolute right-4 bottom-10 shadow-xl z-20'>
                 <Save setReload={setReload} city={city} id={data.id} cat={data.c} contrast={true} />
               </div>
@@ -77,7 +77,7 @@ export default function Product({ data, city }) {
                 }}
                 className='absolute z-10 left-0 top-0 w-full h-full bg-gradient-to-b from-gray-600/70 via-transparent to-transparent'></div>
               <Img className='w-full h-full object-cover object-top sm:object-center absolute' w='1200' h='800' src={data.city + '/' + data.img}></Img>
-            </div>
+            </motion.div>
 
             <div className='flex flex-col gap-y-4 text-justify mx-0 -mt-6 z-10'>
               <p className='p-4 px-6 mx-4 border bg-gray-100 text-black flex items-center justify-center rounded text-md leading-7 gap-x-1'>
@@ -86,7 +86,7 @@ export default function Product({ data, city }) {
               {/*          {warning({ icon: <WarningAmberIcon className='text-gray-300' />, warning: true, title: 'mustknow', razon: ['Peligroso'] })} */}
               <div className='mx-4'>
                 {frame({
-                  title: `${t('whyvisit')} ${data.name}`,
+                  title: `${t('whyvisit')} ${data.article ?? ''} ${data.name}`,
                   razon: ['Buen ambiente', 'Mucho sol'],
                   description:
                     'Es una de las plazas más apreciadas del barrio de Gracia, para salir a tomar una copa y tapear por la noche. Siempre hay mucha animación en la plaza, a veces hay un grupo de jóvenes que tocan música, o bien malabaristas, gente que viene a hacer skate board o a patinar…',
