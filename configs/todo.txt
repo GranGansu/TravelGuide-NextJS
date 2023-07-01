@@ -1,7 +1,8 @@
-1.- Ordenado por City
 2.- Mejorar refresh al guardar Card
 3.- Transition al elegir ciudad
 4.- Reducir api calls
+5.- Añadir más elementos
+6.- Padding loading saved
 
 Comandos:
 npm i 

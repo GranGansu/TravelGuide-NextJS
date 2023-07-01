@@ -14,6 +14,7 @@ export default function Saved({ refy, set }) {
   const ciudades = useGetCities(loading);
   const [refresh, setRefresh] = useState(false);
   const [filter, setFilter] = useState(undefined);
+  const comunesBotones = ' rounded-full';
   const [visible, setVisible] = useModal(
     false,
     <div className='text-xl flex items-center flex-col'>
@@ -51,16 +52,13 @@ export default function Saved({ refy, set }) {
   }, [savedNumber, refresh]);
   return (
     <div className='bg-gray-700/90 flex-grow min-h-[300px] w-full flex flex-col  items-center'>
-      <div className='mt-6 max-4xl'>
-        <Filters filters={filter} set={setFilter} full={ciudades}></Filters>
-      </div>
-      <div className='flex gap-x-2 w-full items-center mt-6 select-none sm:justify-center justify-between px-6'>
-        <h1 className=' text-center text-white '>
-          <span className=' rounded p-2 px-4 text-lg '>{t('h1')}</span>
-        </h1>
-        <div className='flex gap-x-1'>
+      <div className='flex mt-4 gap-x-2 w-full items-center select-none sm:justify-center justify-between px-6 sm:max-w-md'>
+        {/*         <h1 className=' text-center text-white '>
+          <span className=' rounded p-2 pl-0 pr-4 text-lg '>{t('h1')}</span>
+        </h1> */}
+        <div className='grid col-span-2 grid-flow-col gap-x-1 w-full'>
           <button
-            className='p-2 flex w-fit bg-gray-800 hover:bg-red-400 rounded border border-gray-500 hover:cursor-pointer'
+            className={`p-2 flex w-full bg-transparent justify-center hover:bg-red-400 ${comunesBotones} border border-gray-500 hover:cursor-pointer`}
             onClick={() => {
               if (savedNumber !== 0) {
                 localStorage.doPREV = localStorage.doNUEVO;
@@ -77,7 +75,7 @@ export default function Saved({ refy, set }) {
           {visible}
           <button
             disabled={savedNumber !== 0}
-            className='p-2 disabled:bg-gray-400 disabled:text-gray-200 flex w-fit bg-gray-800 disabled:cursor-not-allowed hover:bg-blue-400 rounded border border-gray-500 hover:cursor-pointer'
+            className={`p-2 w-full disabled:opacity-60 disabled:text-gray-200 flex justify-center bg-transparent disabled:cursor-not-allowed hover:bg-blue-400 ${comunesBotones} border border-gray-500 hover:cursor-pointer`}
             onClick={() => {
               setVisible(true);
             }}>
@@ -86,10 +84,13 @@ export default function Saved({ refy, set }) {
           </button>
         </div>
       </div>
+      <div className='mt-6 w-full'>
+        <Filters filters={filter} set={setFilter} full={ciudades}></Filters>
+      </div>
       {results ? (
         <Cards rawData={results} filters={filter} saveIcon={false}></Cards>
       ) : loading && savedNumber !== 0 ? (
-        <Loading className='mt-8'></Loading>
+        <Loading className='mt-8 mb-6'></Loading>
       ) : (
         <div className='p-6 h-full select-none'>{t('nothing')}</div>
       )}
