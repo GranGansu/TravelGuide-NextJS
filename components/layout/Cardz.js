@@ -8,16 +8,20 @@ export default function Cardz({ row, filters, rawData, saveIcon = true, category
   let loading = dataFiltrada === null;
   let data = dataFiltrada !== null && dataFiltrada.length !== 0;
   useEffect(() => {
+    let nuevo = undefined;
     setDataFiltrada(
       filters === undefined
         ? rawData
         : rawData.filter((d) => {
             return (
+              filters !== null &&
               filters
                 .map((f) => {
-                  return f.id;
+                  nuevo = typeof f.id === 'string' ? undefined : '';
+                  return f.id ?? f;
                 })
-                .includes(d.cat) && d
+                .includes(nuevo !== undefined ? d.cat : d.city) &&
+              d
             );
           })
     );

@@ -13,19 +13,19 @@ import { useRouter } from 'next/router';
 import { paths } from './api/all';
 import { appWithTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useGetLocalSaved } from 'components/hooks';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [saved, setSaved] = useState(0);
+  const [reloaded, setReloadad] = useState(0);
   const [globalData, setGlobalData] = useState({ current: true, data: [] });
   const [city, setCity] = useState('barcelona');
+  /*   const [results, setResults] = useGetLocalSaved(() => {}, globalData, setGlobalData, saved); demasiadas api request*/
   useEffect(() => {
-    if (localStorage.doNUEVO === undefined) {
-      localStorage.doNUEVO = JSON.stringify({});
-    }
-    if (localStorage.seeNUEVO === undefined) {
-      localStorage.seeNUEVO = JSON.stringify({});
-    }
+    localStorage.doNUEVO = localStorage.doNUEVO ?? JSON.stringify({});
+    localStorage.seeNUEVO = localStorage.seeNUEVO ?? JSON.stringify({});
+    setReloadad((prev) => prev + 1);
     setCity(() => {
       const devolver = [];
       paths.map((p) => {
@@ -33,16 +33,21 @@ function MyApp({ Component, pageProps }) {
           devolver.push(p.name.toLowerCase());
         }
       });
-      if (devolver[0] === undefined) {
-        return 'barcelona';
-      }
-      return devolver[0];
+      return devolver[0] ?? 'barcelona';
     });
     setSaved([...Object.values(JSON.parse(localStorage.seeNUEVO)), ...Object.values(JSON.parse(localStorage.doNUEVO))].flat().length);
   }, []);
 
   return (
     <div className={`${poppins.className} overflow-y-auto min-h-screen flex flex-col justify-between overflow-x-hidden relative`}>
+      <div className='hidden'>
+        <ul>
+          <li>saved: {saved}</li>
+          <li>globalState: {globalData.current.toString()}</li>
+          <li>city: {city}</li>
+          <li>reloaded: {reloaded}</li>
+        </ul>
+      </div>
       <SavedContext.Provider value={[saved, setSaved]}>
         <CityContext.Provider value={[city, setCity]}>
           <div className='bg-transparent  border-white fixed bottom-0 z-50 w-full sm:relative'>

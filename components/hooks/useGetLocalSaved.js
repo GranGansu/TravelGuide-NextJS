@@ -5,6 +5,7 @@ export default function useGetLocalSaved(load, refy, set, savedNumber) {
   const [saved, setSaved] = useState(0);
   const [results, setResults] = useState(false);
   const reformular = (cityObject, sql) => {
+    //Qué hace
     Object.entries(cityObject).map((e, key) => {
       if (key === 0) {
         sql += e[0] + '[' + e[1].join('-') + ']';
@@ -13,6 +14,12 @@ export default function useGetLocalSaved(load, refy, set, savedNumber) {
       }
     });
     return sql;
+  };
+  const getThen = (array, setResults, load, set, res) => {
+    array.push(...res.data);
+    setResults(array);
+    load(false);
+    set({ current: false, data: array });
   };
   useEffect(() => {
     if ((saved !== 0 && refy.current) || (savedNumber !== refy.data.length && savedNumber !== 0)) {
@@ -28,33 +35,17 @@ export default function useGetLocalSaved(load, refy, set, savedNumber) {
         axios.get(diReformulado + '&category=do').then((res) => {
           todos.push(...res.data);
           axios.get(siReformulado + '&category=see').then((res) => {
-            todos.push(...res.data);
-            setResults(todos);
-            load(false);
-            set({ current: false, data: todos });
+            getThen(todos, setResults, load, set, res);
           });
         });
-      } else if (siReformulado !== template) {
-        axios.get(siReformulado + '&category=see').then((res) => {
-          todos.push(...res.data);
-          setResults(todos);
-          set({ current: false, data: todos });
-          load(false);
-        });
-      } else if (diReformulado !== template) {
-        axios.get(diReformulado + '&category=do').then((res) => {
-          todos.push(...res.data);
-          setResults(todos);
-          set({ current: false, data: todos });
-          load(false);
+      } else {
+        const urlReconstruida = siReformulado !== template ? siReformulado + '&category=see' : diReformulado + '&category=do';
+        axios.get(urlReconstruida).then((res) => {
+          getThen(todos, setResults, load, set, res);
         });
       }
     } else {
-      if (savedNumber !== 0) {
-        setResults(refy.data);
-      } else {
-        setResults([]);
-      }
+      setResults(savedNumber !== 0 ? refy.data : []);
     }
   }, [saved, savedNumber]);
   return [results, setSaved];
