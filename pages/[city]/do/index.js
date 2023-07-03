@@ -7,12 +7,15 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { ExecuteStatementCommand } from '@aws-sdk/client-dynamodb';
 import { ddbDocClient } from '../../../config';
+import { useRouter } from 'next/router';
+
 export default function Do({ rawData, category }) {
+  const router = useRouter();
   const [filter, setFilter] = useState(filtros);
   const { t } = useTranslation('main');
 
   return (
-    <div className='bg-slate-700 flex-grow'>
+    <div className='bg-gray-800 flex-grow'>
       <Head>
         <title>Do</title>
         <meta name='description' content='Planes para hacer en Barcelona'></meta>
@@ -21,7 +24,7 @@ export default function Do({ rawData, category }) {
         <p className='pl-7 mb-2'>
           {t('showing')} <span className='text-gray-500'>{t('click')}</span>
         </p>
-        <Filters full={filtros} filters={filter} set={setFilter}></Filters>
+        <Filters full={filtros} filters={filter} set={setFilter} router={router.query.category}></Filters>
       </div>
       <Cardz category={category} rawData={rawData} filters={filter}></Cardz>
     </div>

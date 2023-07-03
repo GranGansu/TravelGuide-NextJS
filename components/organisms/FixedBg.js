@@ -8,7 +8,7 @@ import { useTranslation } from 'next-i18next';
 const FixedBg = forwardRef(function FixedBg(props, ref) {
   const { t } = useTranslation('common');
   const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], ['100%', '0%']);
+  const y = useTransform(scrollYProgress, [1, 0], ['100%', '0%']);
   return (
     <div className='overflow-hidden w-full sm:h-screen h-[50vh] relative bg-gray-700/20 flex items-center justify-center'>
       <motion.div

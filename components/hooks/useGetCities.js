@@ -4,7 +4,9 @@ export default function useGetCities(loading) {
   const [ciudades, setCiudades] = useState(null);
   useEffect(() => {
     if (localStorage.seeNUEVO !== undefined) {
-      const filtros = Object.keys(JSON.parse(localStorage.seeNUEVO)).map((c) => {
+      const message = JSON.parse(localStorage.seeNUEVO);
+      const message2 = JSON.parse(localStorage.doNUEVO);
+      const filtros = Object.keys({ ...message, ...message2 }).map((c) => {
         return { name: c, id: c };
       });
       setCiudades(filtros);

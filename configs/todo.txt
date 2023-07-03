@@ -2,7 +2,7 @@
 3.- Transition al elegir ciudad
 4.- Reducir api calls
 5.- Añadir más elementos
-6.- Padding loading saved
+6.- Corregir portada, imagen parallax
 
 Comandos:
 npm i 

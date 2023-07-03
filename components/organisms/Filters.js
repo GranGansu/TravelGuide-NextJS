@@ -1,8 +1,9 @@
 import { Button } from 'components/atoms';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'next-i18next';
+import { useEffect } from 'react';
 
-export default function Filters({ filters, set, full }) {
+export default function Filters({ filters, set, full, router }) {
   const { t } = useTranslation('main');
   const handleReset = () => {
     set(full);
@@ -17,6 +18,15 @@ export default function Filters({ filters, set, full }) {
       });
     });
   };
+  useEffect(() => {
+    if (router !== undefined) {
+      set(
+        filters.filter((f) => {
+          return f.id === Number(router);
+        })
+      );
+    }
+  }, [router]);
   return (
     <div className='flex gap-x-2 sm:justify-center overflow-x-scroll px-6'>
       <AnimatePresence>
