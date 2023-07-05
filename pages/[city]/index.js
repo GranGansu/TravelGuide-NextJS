@@ -24,7 +24,7 @@ export default function City(props) {
         <div className='bg-gray-700/90'>
           <Cards rawData={props.rawData} row={true}></Cards>
         </div>
-        <Benefits></Benefits>
+        <Benefits city={city}></Benefits>
         <FixedBg img={`${city}fixed.jpg`}></FixedBg>
       </div>
     </>
