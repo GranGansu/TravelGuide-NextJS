@@ -54,16 +54,7 @@ export default function Saved({ refy, set }) {
   }, [savedNumber, refresh]);
   return (
     <div className='bg-gray-700/90 flex-grow min-h-[300px] w-full flex flex-col  items-center'>
-      {/*       <p>
-        {ciudades &&
-          ciudades.map((c) => {
-            return <span>{c.name}</span>;
-          })}
-      </p> */}
       <div className='flex mt-4 gap-x-2 w-full items-center select-none sm:justify-center justify-between px-6 sm:max-w-md'>
-        {/*         <h1 className=' text-center text-white '>
-          <span className=' rounded p-2 pl-0 pr-4 text-lg '>{t('h1')}</span>
-        </h1> */}
         <div className='grid col-span-2 grid-flow-col gap-x-1 w-full'>
           <button
             disabled={savedNumber === 0}

@@ -13,7 +13,9 @@ const FixedBg = forwardRef(function FixedBg(props, ref) {
     <div className='overflow-hidden w-full sm:h-screen h-[50vh] relative bg-gray-700/20 flex items-center justify-center'>
       <motion.div
         className='absolute w-full h-full -z-10 opacity-100 scale-150'
-        style={{ filter: 'grayscale(1)', backgroundSize: 'initial', backgroundImage: `url(img/${props.img})`, backgroundPositionY: y, backgroundPositionX: 'center' }}></motion.div>
+        animate={{ backgroundPositionY: y }}
+        initial={{ backgroundPositionY: 0 }}
+        style={{ filter: 'grayscale(1)', backgroundSize: 'initial', backgroundImage: `url(img/${props.img})`, backgroundPositionX: 'center' }}></motion.div>
       <div className='z-40 relative items-center flex space-y-4 flex-col'>
         {secciones.map((s) => {
           return (

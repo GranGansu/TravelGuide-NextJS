@@ -30,7 +30,7 @@ export default function Benefits({ city }) {
               <Img className='w-full h-full object-cover' src={`${b.p}.jpg`}></Img>
             </Absolute>
             <div
-              className={`p-6 flex flex-col justify-center border rounded shadow hover:border-2 hover:scale-105 hover:cursor-pointer border-blue-200 bg-transparent z-[999] relative ${
+              className={`p-6 flex flex-col justify-center border rounded shadow hover:border-blue-400 hover:rotate-2 hover:cursor-pointer border-blue-200 bg-transparent z-[999] relative h-full ${
                 key === 1 ? 'row-span-3 border' : ''
               }`}>
               <motion.h1 className='text-3xl font-bold text-gray-50' style={{ fontSize: y }}>

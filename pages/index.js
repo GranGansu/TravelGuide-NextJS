@@ -7,6 +7,8 @@ import useGetCity from 'components/hooks/useGetCity';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { ExecuteStatementCommand } from '@aws-sdk/client-dynamodb';
 import { ddbDocClient } from '../config';
+import Scroll from 'components/atoms/SmoothScroll';
+
 const Home = forwardRef(function Home(props, ref) {
   const [city, setCity] = useGetCity();
   return (

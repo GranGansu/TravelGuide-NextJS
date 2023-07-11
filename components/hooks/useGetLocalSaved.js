@@ -22,7 +22,7 @@ export default function useGetLocalSaved(load, refy, set, savedNumber) {
     set({ current: false, data: array });
   };
   useEffect(() => {
-    if ((saved !== 0 && refy.current) || (savedNumber !== refy.data.length && savedNumber !== 0)) {
+    if ((savedNumber !== 0 && refy.current) || (savedNumber !== refy.data.length && savedNumber !== 0)) {
       const todos = [];
       const see = localStorage.seeNUEVO !== undefined && localStorage.seeNUEVO !== '' && JSON.parse(localStorage.seeNUEVO);
       const doo = localStorage.doNUEVO !== undefined && localStorage.doNUEVO !== '' && JSON.parse(localStorage.doNUEVO);
@@ -47,6 +47,6 @@ export default function useGetLocalSaved(load, refy, set, savedNumber) {
     } else {
       setResults(savedNumber !== 0 ? refy.data : []);
     }
-  }, [saved, savedNumber]);
+  }, [savedNumber]);
   return [results, setSaved];
 }

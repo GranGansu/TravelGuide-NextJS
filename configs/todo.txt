@@ -1,8 +1,9 @@
-2.- Mejorar refresh al guardar Card
-3.- Transition al elegir ciudad
-4.- Reducir api calls
-5.- Añadir más elementos
-6.- Corregir portada, imagen parallax
+1.- Mejorar refresh al guardar Card
+2.- Añadir más elementos en aws
+3.- Corregir portada, imagen parallax
+
+Can Wait:
+2.- Transition al elegir ciudad
 
 Comandos:
 npm i 
