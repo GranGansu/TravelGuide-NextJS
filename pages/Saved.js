@@ -10,7 +10,7 @@ import { Filters } from 'components/organisms';
 import { motion, AnimatePresence } from 'framer-motion';
 export default function Saved({ refy, set }) {
   const { t } = useTranslation('saved');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const ciudades = useGetCities(loading);
   const [refresh, setRefresh] = useState(false);
   const [filter, setFilter] = useState(undefined);

@@ -23,6 +23,7 @@ export default function useGetLocalSaved(load, refy, set, savedNumber) {
   };
   useEffect(() => {
     if ((savedNumber !== 0 && refy.current) || (savedNumber !== refy.data.length && savedNumber !== 0)) {
+      load(true);
       const todos = [];
       const see = localStorage.seeNUEVO !== undefined && localStorage.seeNUEVO !== '' && JSON.parse(localStorage.seeNUEVO);
       const doo = localStorage.doNUEVO !== undefined && localStorage.doNUEVO !== '' && JSON.parse(localStorage.doNUEVO);

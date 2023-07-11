@@ -1,9 +1,9 @@
-1.- Mejorar refresh al guardar Card
+1.- Mejorar refresh al guardar Card ?notienesolucion?
 2.- Añadir más elementos en aws
-3.- Corregir portada, imagen parallax
 
-Can Wait:
-2.- Transition al elegir ciudad
+Estético:
+Transition al elegir ciudad
+Corregir portada, imagen parallax
 
 Comandos:
 npm i 

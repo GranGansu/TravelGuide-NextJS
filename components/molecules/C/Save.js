@@ -51,11 +51,11 @@ export default function Save({ id, cat, contrast = false, setChecked = () => {},
       }`}
       onClick={(e) => {
         e.preventDefault();
-        guardadoConCiudad();
         if (!visible) {
+          guardadoConCiudad();
           setVisible(true);
           setChecked(true);
-          setSaved((prev) => !prev); //Por esto se recarga toda la página
+          setSaved((prev) => !prev);
         }
       }}>
       <Save></Save>

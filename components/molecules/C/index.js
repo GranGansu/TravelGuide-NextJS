@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Must from './Must';
 import Save from './Save';
 import { motion } from 'framer-motion';
-import { useState, useMemo, useContext } from 'react';
+import { useState, useContext } from 'react';
 import useCountSaved from '../../hooks/useCountSaved';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -14,7 +14,6 @@ export default function C({ id, title, img, cat, must, saveIcon, priority, city,
   const [a, setSaved] = useCountSaved();
   const [checked, setChecked] = useState(false);
   const [reload, setReload] = useContext(ReloadContext);
-
   const [background, setBackground] = useState(false);
   const { t } = useTranslation('common');
   const handleDelete = (e) => {
