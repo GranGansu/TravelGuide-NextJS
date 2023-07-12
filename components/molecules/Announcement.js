@@ -28,7 +28,7 @@ export default function Announcement() {
     <div className='text-md mx-auto items-center justify-center grid grid-cols-2 sm:grid-cols-3 max-w-4xl'>
       {modal}
       {lang}
-      <Link href='/' className='py-3 relative h-full items-center text-gray-300 overflow-hidden hidden sm:flex'>
+      <Link href={`/${city}`} className='py-3 relative h-full items-center text-gray-300 overflow-hidden hidden sm:flex'>
         <ArrowDropDownIcon className='text-2xl rotate-90 absolute text-black z-0 left-4' />
         <span className='ml-9'>{t('home')}</span>
       </Link>

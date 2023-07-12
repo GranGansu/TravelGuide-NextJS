@@ -19,6 +19,7 @@ export const filtroshacer = [
   { id: 4, name: 'theatres' },
   { id: 5, name: 'beaches' },
   { id: 6, name: 'nature' },
+  { id: 7, name: 'languageexchange' },
 ];
 export default function handler(req, res) {
   /*   const see = req.query.see;

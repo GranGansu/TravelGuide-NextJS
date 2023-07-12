@@ -1,5 +1,5 @@
 1.- Mejorar refresh al guardar Card ?notienesolucion?
-2.- Añadir más elementos en aws
+2.- Añadir más elementos en aws y corregir categorías
 
 Estético:
 Transition al elegir ciudad

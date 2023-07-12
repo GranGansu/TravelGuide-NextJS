@@ -12,7 +12,7 @@ export default function Saved({ refy, set }) {
   const { t } = useTranslation('saved');
   const [loading, setLoading] = useState(false);
   const ciudades = useGetCities(loading);
-  const [refresh, setRefresh] = useState(false);
+  //const [refresh, setRefresh] = useState(false);
   const [filter, setFilter] = useState(undefined);
   const comunesBotones = ' rounded-full';
   const [visible, setVisible] = useModal(
@@ -25,7 +25,7 @@ export default function Saved({ refy, set }) {
             if (localStorage.doPREV || localStorage.seePREV) {
               localStorage.doNUEVO = localStorage.doPREV;
               localStorage.seeNUEVO = localStorage.seePREV;
-              setRefresh((prev) => !prev);
+              //setRefresh((prev) => !prev);
               updateSaved((prev) => !prev);
               setLoading((prev) => !prev);
               setFilter(ciudades);
@@ -51,7 +51,7 @@ export default function Saved({ refy, set }) {
   }, [ciudades]);
   useEffect(() => {
     setResults((prev) => !prev);
-  }, [savedNumber, refresh]);
+  }, [savedNumber]);
   return (
     <div className='bg-gray-700/90 flex-grow min-h-[300px] w-full flex flex-col  items-center'>
       <div className='flex mt-4 gap-x-2 w-full items-center select-none sm:justify-center justify-between px-6 sm:max-w-md'>
@@ -65,7 +65,7 @@ export default function Saved({ refy, set }) {
                 localStorage.seePREV = localStorage.seeNUEVO;
                 localStorage.doNUEVO = JSON.stringify({});
                 localStorage.seeNUEVO = JSON.stringify({});
-                setRefresh((prev) => !prev);
+                //setRefresh((prev) => !prev);
                 updateSaved((prev) => !prev);
               }
             }}>

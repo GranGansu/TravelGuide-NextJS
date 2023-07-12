@@ -57,7 +57,7 @@ export default Home;
 }
  */
 export async function getStaticProps({ locale }) {
-  /*   const ciudad = params.city; */
+  /*   const ciudad = params.city; SOLUCIONAR ESTO*/
   let sql = { Statement: `SELECT * FROM "ver" WHERE c='see' AND city='barcelona'` };
   const data = await ddbDocClient.send(new ExecuteStatementCommand(sql));
   const datos = data['Items'].map((i) => {
