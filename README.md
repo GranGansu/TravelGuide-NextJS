@@ -12,8 +12,8 @@ Proyecto reactive utilizando NextJS, etc..
 | TailwindCSS | LocalStorage | AWS Dynamo
 
 # To-do
-- [ ] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
+- [ ] Agregar Login y Registro
+- [ ] Corregir max-w de imagen de producto en desktop
+- [ ] Corregir Parallax en Home
+- [ ] Añadir más elementos en AWS y corregir categorías
+- [x] Agregar selector de idiomas en Inglés y Español
