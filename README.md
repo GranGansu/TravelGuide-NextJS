@@ -1,5 +1,5 @@
 # Introducción
-Web 
+Guía de viajes simplificada, sitios destacados ordenados por filtros, y la opción de guardar en favoritos.
 # Tecnologías
 Proyecto reactive utilizando NextJS, etc..
 
@@ -7,9 +7,9 @@ Proyecto reactive utilizando NextJS, etc..
 ![Tailwind](https://img.shields.io/badge/tailwind-100000?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=black&color=black)
 
 ## Leyenda
-| CSS | Persistencia | Database |
-| ----------- | ----------- | ----------- |
-| TailwindCSS | LocalStorage | AWS Dynamo
+| CSS | Persistencia | Database | Animacion |
+| ----------- | ----------- | ----------- | ----------- |
+| TailwindCSS | LocalStorage | AWS Dynamo | Framer-motion
 
 # To-do
 - [ ] Agregar Login y Registro
