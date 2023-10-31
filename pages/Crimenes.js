@@ -87,8 +87,8 @@ export default function Crimenes() {
                 <div>
                   Víctimas ({c.victims.length}
                   ):
-                  {c.victims.map((v) => {
-                    return <div>{v}</div>;
+                  {c.victims.map((v, key) => {
+                    return <div key={key}>{v}</div>;
                   })}
                 </div>
               </div>
