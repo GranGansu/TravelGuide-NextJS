@@ -24,7 +24,7 @@ export default function Benefits({ city }) {
     { img: false, h1: '12', p: 'sights', icon: <LightModeIcon />, cat: 'see', id: 6 },
     { img: false, h1: '1050', p: 'theatre', icon: <TheaterComedyIcon />, cat: 'do', id: 4 },
     { img: false, h1: '77', p: 'church', icon: <ChurchIcon />, cat: 'see', id: 2 },
-    { img: true, h1: '77', p: 'lang', icon: <PublicIcon />, cat: 'do', id: 4 },
+    { img: true, h1: '77', p: 'lang', icon: <PublicIcon />, cat: 'do', id: 7 },
   ];
   return (
     <div className='z-50 min-h-min text-center px-6 sm:px-0 py-[40px] sm:flex sm:flex-row grid grid-cols-2 gap-4 relative justify-center bg-gray-900 overflow-x-hidden overflow-hidden'>

@@ -33,7 +33,7 @@ export default function Announcement() {
         <span className='ml-9'>{t('home')}</span>
       </Link>
       <motion.button
-        className='max-w-fit sm:-ml-3 text-white  place-self-left sm:place-self-center capitalize hover:cursor-pointer font-bold border-gray-400 pr-2 pl-5 sm:pl-0 py-3 rounded'
+        className='max-w-fit sm:-ml-3 text-white  place-self-left sm:place-self-center capitalize hover:cursor-pointer  border-gray-400 pr-2 pl-5 sm:pl-0 py-3 rounded'
         onClick={() => {
           setVis(true);
         }}>

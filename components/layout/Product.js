@@ -18,21 +18,24 @@ export default function Product({ data, city }) {
   const frame = ({ icon, title, razon, description, warning = false }) => {
     return (
       <div className={`py-4 px-2 bg-gray-0 text-black flex flex-col ${warning && 'shadow-md border rounded-xl px-6'}`}>
-        <h3 className=' text-2xl'>
+        <h1 className=' text-xl font-bold'>
           {icon} {t(title)}
-        </h3>
-        <div className='my-2'>
+        </h1>
+        <div className='mt-2'>
           <ul className='flex gap-x-2'>
             {razon.map((r) => {
               return (
-                <li className='p-2 border border-inherit text-gray-500 text-sm bg-white rounded px-2' key={r}>
+                <li className='p-1 border border-inherit text-gray-500 text-lg border-[aquamarine] bg-white rounded-full px-3' key={r}>
                   {r}
                 </li>
               );
             })}
           </ul>
         </div>
-        {description}
+        <h4 className='my-4 mt-8  text-xl font-bold'>Descripción</h4>
+        <p className='text-lg max-w-2xl'>{description}</p>
+        <h4 className='my-4 mt-8  text-xl font-bold'>Tiempo recomendado</h4>
+        <p className='text-lg max-w-2xl'>{description}</p>
       </div>
     );
   };
@@ -67,8 +70,8 @@ export default function Product({ data, city }) {
           {visible}
           <h1 className='p-4 px-6 absolute  z-20  text-2xl'>{data.name}</h1>
           <div className='pb-6 grid grid-cols-1  text-black '>
-            <motion.div animate={{ scale: 1 }} initial={{ scale: 0.8 }} className='w-full h-72 sm:h-96 shadow-inner border-b relative flex items-center'>
-              <div className='absolute right-4 bottom-10 shadow-xl z-20'>
+            <motion.div animate={{ scale: 1 }} initial={{ scale: 0.8 }} className='w-full h-72 sm:h-96 relative flex items-center'>
+              <div className='absolute left-6 top-16 shadow-xl z-20'>
                 <Save setReload={setReload} city={city} id={data.id} cat={data.c} contrast={true} />
               </div>
               <div
@@ -76,44 +79,59 @@ export default function Product({ data, city }) {
                   setVisible(true);
                 }}
                 className='absolute z-10 left-0 top-0 w-full h-full bg-gradient-to-b from-gray-600/70 via-transparent to-transparent'></div>
-              <Img className='w-full h-full object-cover object-top sm:object-center absolute' w='1200' h='800' src={data.city + '/' + data.img}></Img>
+              <Img className='w-full h-full object-cover object-top sm:object-center absolute sm:rounded-b-xl' w='1200' h='800' src={data.city + '/' + data.img}></Img>
             </motion.div>
 
             <div className='flex flex-col gap-y-4 text-justify mx-0 -mt-6 z-10'>
-              <p className='p-4 px-6 mx-4 border bg-gray-100 text-black flex items-center justify-center rounded text-md leading-7 gap-x-1'>
-                <VerifiedIcon className='text-gray-400' /> {data.razon[0].toUpperCase() + data.razon.substring(1)}
-              </p>
-              {/*          {warning({ icon: <WarningAmberIcon className='text-gray-300' />, warning: true, title: 'mustknow', razon: ['Peligroso'] })} */}
-              <div className='mx-4'>
+              <div className=' w-fit  text-black flex items-center justify-center text-md gap-x-2 ml-6'>
+                <VerifiedIcon className='text-gray-400 bg-white p-2 rounded-full text-5xl' />{' '}
+                <span className='bg-white px-4 py-1 rounded-full hidden'>{data.razon[0].toUpperCase() + data.razon.substring(1)}</span>
+                <span className='bg-white px-4 py-1 rounded-full'>Recomendado</span>
+              </div>
+              <div className='mx-4 grid sm:grid-cols-2'>
                 {frame({
                   title: `${t('whyvisit')} ${data.article ?? ''} ${data.name}`,
                   razon: ['Buen ambiente', 'Mucho sol'],
                   description:
                     'Es una de las plazas más apreciadas del barrio de Gracia, para salir a tomar una copa y tapear por la noche. Siempre hay mucha animación en la plaza, a veces hay un grupo de jóvenes que tocan música, o bien malabaristas, gente que viene a hacer skate board o a patinar…',
                 })}
-                <div className=' p-6 rounded-lg mt-6 border bg-gray-50'>
-                  <p className='text-lg mb-4'>
-                    {t('whatsbest')} {data.name}?
-                  </p>
-                  <div className='grid sm:grid-cols-2 gap-4'>
-                    {Object.keys(opiniones)
-                      .sort((a, b) => {
-                        return opiniones[b] - opiniones[a];
-                      })
-                      .map((opinion, key) => {
-                        const number = opiniones[opinion];
-                        return (
-                          <div
-                            className='overflow-hidden relative p-4 hover:cursor-pointer select-none border border-gray-200 backdrop-blur-sm rounded-md flex items-center justify-between hover:border-black/20 hover:bg-gray-50'
-                            key={key}>
-                            <div className='relative z-10 items-center flex justify-between w-full'>
-                              <p className='capitalize bg-white p-2 rounded shadow'>{opinion}</p>
-                              <p className='text-xl'>{number}%</p>
+                <div className='sm:px-4'>
+                  <div className='p-2'>
+                    <h5 className=' my-4 mt-2 text-xl font-bold'>Ubicación</h5>
+                    <iframe
+                      src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11972.798569582073!2d2.13520495!3d41.39147055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a2f1602b4819%3A0x1eecc2af1c60d64b!2sPla%C3%A7a%20de%20Catalunya!5e0!3m2!1ses!2ses!4v1698752288691!5m2!1ses!2ses'
+                      width='400'
+                      className='w-full'
+                      height='300'
+                      allowfullscreen=''
+                      loading='lazy'
+                      referrerpolicy='no-referrer-when-downgrade'></iframe>
+                  </div>
+
+                  <div className=' p-2 mt-4'>
+                    <p className='text-xl mb-4 font-bold'>
+                      {t('whatsbest')} {data.name}?
+                    </p>
+                    <div className='grid gap-4'>
+                      {Object.keys(opiniones)
+                        .sort((a, b) => {
+                          return opiniones[b] - opiniones[a];
+                        })
+                        .map((opinion, key) => {
+                          const number = opiniones[opinion];
+                          return (
+                            <div
+                              className='overflow-hidden relative p-4 hover:cursor-pointer select-none border border-gray-200 backdrop-blur-sm rounded-md flex items-center justify-between bg-gray-50 hover:border-black/20 hover:bg-gray-100'
+                              key={key}>
+                              <div className='relative z-10 items-center flex justify-between w-full'>
+                                <p className='capitalize bg-white p-2 rounded shadow'>{opinion}</p>
+                                <p className='text-xl'>{number}%</p>
+                              </div>
+                              <div className='absolute shadow-inner h-full left-0 top-0 z-0 rounded-r-sm relleno' style={{ width: number + '%', opacity: number + '%' }}></div>
                             </div>
-                            <div className='absolute shadow-inner h-full left-0 top-0 z-0 rounded-r-sm relleno' style={{ width: number + '%', opacity: number + '%' }}></div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                    </div>
                   </div>
                 </div>
               </div>
