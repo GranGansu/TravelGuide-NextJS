@@ -19,3 +19,4 @@ Proyecto reactive escrito en Javascript. Con NextJS y TailwindCSS. Utilizando SS
 - [ ] Añadir más elementos en AWS y editar categorías
 - [ ] Normalizar nombres de variables
 - [x] Agregar selector de idiomas en Inglés y Español
+- [x] Clash de ID's
