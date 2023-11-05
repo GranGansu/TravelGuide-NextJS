@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next';
 
 export default function Banner({ city }) {
   const { t } = useTranslation('home');
-
+  const buttonAnimation = { paddingRight: '30px', paddingLeft: '30px' };
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 600], ['0%', '60%']);
   const yb = useTransform(scrollY, [0, 500], ['-40%', '30%']);
@@ -44,15 +44,15 @@ export default function Banner({ city }) {
         </div>
         <div className='flex gap-4 sm:flex-row flex-col font-thin capitalize'>
           <motion.button
-            whileHover={{ scale: 0.95 }}
-            whileTap={{ scale: 0.6 }}
-            className='px-6 shadow backdrop-blur-md py-2 text-2xl text-white rounded-full bg-transparent border w-fit'>
+            whileHover={buttonAnimation}
+            whileTap={buttonAnimation}
+            className='px-6 shadow  py-2 text-2xl backdrop-sepia text-white rounded-full bg-transparent border-2 w-fit'>
             <Link href={`/${city}/see`} className='text-2xl'>
               {t('seem')}
               <span className='capitalize text-2xl'>{city}</span>
             </Link>
           </motion.button>
-          <motion.button
+          {/*           <motion.button
             whileHover={{ scale: 0.95 }}
             whileTap={{ scale: 0.6 }}
             className='px-6 shadow backdrop-blur-md py-2 text-2xl text-white rounded-full bg-transparent border w-fit'>
@@ -60,7 +60,7 @@ export default function Banner({ city }) {
               {t('dom')}
               <span className='capitalize text-2xl'>{city}</span>
             </Link>
-          </motion.button>
+          </motion.button> */}
         </div>
       </div>
       {/* <Absolute className='bg-red-500  z-10 rotate-[20deg] -translate-x-12 opacity-90 w-[120vw]'></Absolute> */}

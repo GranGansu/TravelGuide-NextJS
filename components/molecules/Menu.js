@@ -22,7 +22,7 @@ export default function Menu({ city }) {
         return (
           <motion.li
             key={key}
-            className={`py-2 sm:p-0 sm:border-0 h-full flex justify-center border-transparent border-t-2 ${active && 'bg-gray-600 border-t-2 border-yellow-400 '}`}>
+            className={`py-1 sm:p-0 sm:border-0 h-full flex justify-center border-transparent border-t-2 ${active && 'bg-gray-600 border-t-2 border-yellow-400 '}`}>
             <Link href={`/${i.url !== 'Saved' ? city + '/' : ''}${i.url}`} className='w-full h-full p-4 py-3 flex items-center justify-center'>
               <div className='flex gap-x-2 items-center'>
                 {i.url !== 'Saved' && (

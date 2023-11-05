@@ -31,13 +31,13 @@ export default function Benefits({ city }) {
       {beneficios.map((b, key) => {
         return (
           <Link key={key} href={`${city}/${b.cat}/?category=${b.id}`} className='relative'>
-            <Absolute className='opacity-40'>
-              <motion.div className='w-full h-full ' animate={{ scaleX: 1.06 }} initial={{ scaleX: 1 }} transition={{ repeat: Infinity, repeatType: 'mirror' }}>
+            <Absolute className='opacity-40 rounded'>
+              <motion.div className='w-full h-full ' animate={{ scale: 1.1 }} initial={{ scaleX: 1 }} transition={{ repeat: Infinity, repeatType: 'mirror' }}>
                 <Img className='w-full h-full object-cover' src={`${'place'}.jpg`}></Img>
               </motion.div>
             </Absolute>
             <div
-              className={`p-6 flex flex-col justify-center border rounded shadow hover:border-blue-400 hover:rotate-2 hover:cursor-pointer border-blue-200 bg-transparent z-[999] relative h-full ${
+              className={`p-6 flex flex-col justify-center border rounded shadow hover:border-blue-400 hover:cursor-pointer border-transparent bg-transparent z-[999] relative h-full ${
                 key === 1 ? 'row-span-3 border' : ''
               }`}>
               <motion.h1 className='text-3xl font-bold text-gray-50' style={{ fontSize: y }}>
