@@ -32,9 +32,9 @@ export default function Benefits({ city }) {
         return (
           <Link key={key} href={`${city}/${b.cat}/?category=${b.id}`} className='relative'>
             <Absolute className='opacity-40 rounded'>
-              <motion.div className='w-full h-full ' animate={{ scale: 1.1 }} initial={{ scaleX: 1 }} transition={{ repeat: Infinity, repeatType: 'mirror' }}>
+              {/*               <motion.div className='w-full h-full '>
                 <Img className='w-full h-full object-cover' src={`${'place'}.jpg`}></Img>
-              </motion.div>
+              </motion.div> */}
             </Absolute>
             <div
               className={`p-6 flex flex-col justify-center border rounded shadow hover:border-blue-400 hover:cursor-pointer border-transparent bg-transparent z-[999] relative h-full ${

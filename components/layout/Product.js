@@ -84,7 +84,7 @@ export default function Product({ data, city }) {
 
             <div className='flex flex-col gap-y-4 text-justify mx-0 -mt-6 z-10'>
               <div className=' w-fit  text-black flex items-center justify-center text-md gap-x-2 ml-6'>
-                <VerifiedIcon className='text-gray-400 bg-white p-2 rounded-full text-5xl' />{' '}
+                <VerifiedIcon className='text-gray-400 bg-white p-2 rounded-full ' style={{ fontSize: '45px' }} />{' '}
                 <span className='bg-white px-4 py-1 rounded-full hidden'>{data.razon[0].toUpperCase() + data.razon.substring(1)}</span>
                 <span className='bg-white px-4 py-1 rounded-full'>Recomendado</span>
               </div>
